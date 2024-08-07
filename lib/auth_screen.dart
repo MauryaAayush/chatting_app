@@ -41,7 +41,6 @@ class AuthPage extends StatelessWidget {
          ElevatedButton(onPressed: () {
            // firebaseAuthServices.createAccountUsingEmail();
 
-
            controller.singUp(controller.txtemail.text,controller.txtpass.text);
 
          }, child: const Text('Create a account'))
