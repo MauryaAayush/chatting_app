@@ -1,5 +1,6 @@
+
 import 'package:chatting_app/auth%20service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chatting_app/controller.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatelessWidget {
@@ -7,17 +8,43 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    var controller = AuthController();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Login'),),
       
       body: Column(
        children: [
-         TextField(),
-         TextField(),
-         
+         TextField(
+           controller: controller.txtemail,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(
+
+            )
+          ),
+         ),
+         const SizedBox(
+           height: 20,
+         ),
+         TextField(
+           controller: controller.txtpass,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(
+            )
+          ),
+         ),
+         const SizedBox(
+           height: 20,
+         ),
          ElevatedButton(onPressed: () {
-           firebaseAuthServices.createAccountUsingEmail();
-         }, child: Text('Create a account'))
+           // firebaseAuthServices.createAccountUsingEmail();
+
+
+           controller.singUp(controller.txtemail.text,controller.txtpass.text);
+
+         }, child: const Text('Create a account'))
        ], 
       ),
       
