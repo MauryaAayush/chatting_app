@@ -1,18 +1,13 @@
+import 'package:chatting_app/Views/sigin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Controller/controller.dart';
 
-class SignUpController extends GetxController {
-  var isPasswordVisible = false.obs;
-  var isConfirmPasswordVisible = false.obs;
-  var agreeToTerms = false.obs;
-}
-
-class SignUpPage extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
 
-  SignUpPage({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +26,9 @@ class SignUpPage extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        bottomRight: Radius.elliptical(150, 120),
+                        bottomLeft: Radius.elliptical(150, 120),
                       ),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage(
                           'assets/pexels-photo-807598.jpeg',
                         ),
@@ -43,7 +38,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   Text(
-                    'Create Account',
+                    'Login',
                     style: GoogleFonts.ubuntu(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
@@ -52,36 +47,14 @@ class SignUpPage extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Sign up to get started',
+                    'Sign in to continue',
                     style: GoogleFonts.roboto(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Full Name',
-                        labelStyle: TextStyle(
-                          color: Color(0xFF40744D),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Color(0xFF40744D),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 30),
                   AnimatedContainer(
                     duration: Duration(milliseconds: 300),
                     child: TextFormField(
@@ -113,8 +86,10 @@ class SignUpPage extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: TextStyle(color: Color(0xFF40744D)),
-                          prefixIcon:
-                          Icon(Icons.lock, color: Color(0xFF40744D)),
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Color(0xFF40744D),
+                          ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               signUpController.isPasswordVisible.value
@@ -138,80 +113,15 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Obx(
-                        () => AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          labelStyle: TextStyle(color: Color(0xFF40744D)),
-                          prefixIcon:
-                          Icon(Icons.lock, color: Color(0xFF40744D)),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              signUpController.isConfirmPasswordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Color(0xFF40744D),
-                            ),
-                            onPressed: () {
-                              signUpController.isConfirmPasswordVisible.value =
-                              !signUpController
-                                  .isConfirmPasswordVisible.value;
-                            },
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                        obscureText:
-                        !signUpController.isConfirmPasswordVisible.value,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Obx(
-                            () => Checkbox(
-                          value: signUpController.agreeToTerms.value,
-                          onChanged: (value) {
-                            signUpController.agreeToTerms.value = value!;
-                          },
-                          activeColor: Color(0xFF40744D),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          'I agree to the Terms and Conditions',
-                          style: TextStyle(color: Color(0xFF40744D)),
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(height: 28),
                   AnimatedContainer(
                     duration: Duration(milliseconds: 300),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (signUpController.agreeToTerms.value) {
-                          controller.signUp(
-                            controller.txtemail.text,
-                            controller.txtpass.text,
-                          );
-                        } else {
-                          Get.snackbar(
-                            'Terms and Conditions',
-                            'You must agree to the terms and conditions to sign up.',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
-                        }
+                        controller.signIn(
+                          controller.txtemail.text,
+                          controller.txtpass.text,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF40744D),
@@ -224,8 +134,9 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Sign Up',
+                        'Login',
                         style: GoogleFonts.ubuntu(
+                          color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -237,22 +148,21 @@ class SignUpPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account?',
+                        "Don't have an account?",
                         style: TextStyle(color: Colors.grey),
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigate to login page
-                          // Get.to(LoginPage());
+                          Get.to(SignUpPage());
                         },
-                        child: Text(
-                          'Login',
+                        child: const Text(
+                          'Sign Up',
                           style: TextStyle(color: Color(0xFF40744D)),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

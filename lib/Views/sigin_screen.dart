@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Controller/controller.dart';
+import 'Login_screen.dart';
 
 class SignUpController extends GetxController {
   var isPasswordVisible = false.obs;
@@ -236,7 +237,9 @@ class SignUpPage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(()=> LoginScreen());
+                        },
                         child: Text(
                           'Login',
                           style: TextStyle(color: Color(0xFF40744D)),
