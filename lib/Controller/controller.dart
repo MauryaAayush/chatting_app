@@ -46,7 +46,6 @@ class AuthController extends GetxController {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
-        // Navigate to home screen
         Get.to(const HomeScreen());
       } else {
         Get.snackbar(
