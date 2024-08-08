@@ -14,4 +14,5 @@ Future<void> singUp(String email,String pass) async {
   await FirebaseAuthServices.authServices.createAccountUsingEmail(email,pass);
 }
 
+
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'Views/auth_screen.dart';
+import 'Views/sigin_screen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
-      getPages: [GetPage(name: '/', page: () => const AuthPage(),)],
+      debugShowCheckedModeBanner: false,
+      getPages: [
+        GetPage(name: '/', page: () =>  SignUpPage(),)
+      ],
 
     );
   }
