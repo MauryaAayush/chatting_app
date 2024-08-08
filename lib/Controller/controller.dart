@@ -1,5 +1,5 @@
 
-import 'package:chatting_app/auth%20service.dart';
+import 'package:chatting_app/Helper/auth%20service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

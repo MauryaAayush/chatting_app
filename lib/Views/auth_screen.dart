@@ -1,6 +1,6 @@
 
-import 'package:chatting_app/auth%20service.dart';
-import 'package:chatting_app/controller.dart';
+import 'package:chatting_app/Helper/auth%20service.dart';
+import 'package:chatting_app/Controller/controller.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatelessWidget {
