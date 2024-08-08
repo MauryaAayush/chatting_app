@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class FirebaseAuthServices {
   static FirebaseAuthServices authServices = FirebaseAuthServices();
@@ -30,5 +31,17 @@ class FirebaseAuthServices {
       print(e);
       return false;
     }
+
+
+
   }
+
+  Future<void> sign_Out() async {
+    await auth.signOut();
+    User? user = auth.currentUser;
+    if(user == null){
+      Get.back();
+    }
+  }
+
 }

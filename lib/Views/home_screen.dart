@@ -10,6 +10,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Home Screen'),
+        actions: [
+          IconButton(onPressed: () {
+            
+          }, icon: Icon(Icons.logout))
+        ],
       ),
       body: Center(
         child: ElevatedButton(onPressed: () {
