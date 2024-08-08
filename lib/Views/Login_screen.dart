@@ -207,7 +207,7 @@ class SignUpPage extends StatelessWidget {
                           Get.snackbar(
                             'Terms and Conditions',
                             'You must agree to the terms and conditions to sign up.',
-                            snackPosition: SnackPosition.TOP,
+                            snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: Colors.red,
                             colorText: Colors.white,
                           );
@@ -218,25 +218,33 @@ class SignUpPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        padding:
-                        EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 80,
+                        ),
                       ),
                       child: Text(
                         'Sign Up',
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.ubuntu(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have an account?",
+                        'Already have an account?',
                         style: TextStyle(color: Colors.grey),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Navigate to login page
+                          // Get.to(LoginPage());
+                        },
                         child: Text(
                           'Login',
                           style: TextStyle(color: Color(0xFF40744D)),
@@ -244,6 +252,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 30),
                 ],
               ),
             ),
