@@ -8,7 +8,7 @@ import '../Controller/controller.dart';
 class LoginScreen extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
 
-  LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
