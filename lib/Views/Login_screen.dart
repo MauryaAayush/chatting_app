@@ -2,6 +2,7 @@ import 'package:chatting_app/Views/sigin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import '../Controller/controller.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 250,
+                    height: 220,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -145,6 +146,36 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.5,
+                          color: Colors.grey[300],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          'OR',
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.5,
+                          color: Colors.grey[300],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  SignInButton(Buttons.google, onPressed: (){}),
+                  SizedBox(height: 10),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -160,6 +191,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(color: Color(0xFF40744D)),
                         ),
                       ),
+
                     ],
                   ),
                   const SizedBox(height: 30),
