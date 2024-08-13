@@ -1,4 +1,5 @@
 import 'package:chatting_app/Helper/auth%20service.dart';
+import 'package:chatting_app/Helper/google_services.dart';
 import 'package:chatting_app/Views/sigin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -214,7 +215,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   SignInButton(Buttons.google, onPressed: () async {
-                    await FirebaseAuthServices.authServices.signInWithGoogle();
+                    await GoogleLoginServices.googleLoginServices.signInWithGoogle();
 
                     // Check if the user is signed in
                     if (FirebaseAuth.instance.currentUser != null) {

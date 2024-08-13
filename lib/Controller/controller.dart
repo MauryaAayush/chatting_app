@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:chatting_app/Helper/auth%20service.dart';
+import 'package:chatting_app/Helper/google_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:get/get.dart';
@@ -9,6 +12,34 @@ import '../Views/home_screen.dart';
 class AuthController extends GetxController {
   TextEditingController txtemail = TextEditingController();
   TextEditingController txtpass = TextEditingController();
+
+  RxString email = ''.obs;
+  RxString name = ''.obs;
+  RxString url = ''.obs;
+  RxString phone = ''.obs;
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    getUserDetails();
+  }
+
+  void getUserDetails(){
+    User? user = GoogleLoginServices.googleLoginServices.currentUser();
+    if (user != null) {
+      email.value = user.email!;
+      url.value = user.photoURL!;
+      name.value = user.displayName!;
+      phone.value = user.phoneNumber ?? "no number";
+      log('-----------------------------------');
+      log(email.value);
+      log(url.value);
+      log(name.value);
+      log(phone.value);
+    }
+  }
+
 
   Future<void> signUp(String email, String pass) async {
     try {
@@ -66,4 +97,10 @@ class AuthController extends GetxController {
       );
     }
   }
+
+  void logOut(){
+    FirebaseAuthServices.authServices.sign_Out();
+    GoogleLoginServices.googleLoginServices.logOut();
+  }
+
 }
