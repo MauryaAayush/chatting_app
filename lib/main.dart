@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'Views/Login_screen.dart';
 import 'Views/auth_screen.dart';
 import 'Views/home_screen.dart';
 import 'Views/sigin_screen.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: [
-        GetPage(name: '/', page: () =>  SignUpPage(),),
+        GetPage(name: '/', page: () =>  LoginScreen(),),
         GetPage(name: '/second', page: () =>  const HomeScreen(),),
       ],
 
