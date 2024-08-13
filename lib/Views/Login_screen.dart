@@ -122,6 +122,7 @@ class LoginScreen extends StatelessWidget {
                         controller.signIn(
                           controller.txtemail.text,
                           controller.txtpass.text,
+                          context
                         );
                       },
                       style: ElevatedButton.styleFrom(

@@ -42,11 +42,11 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signIn(String email, String pass) async {
+  Future<void> signIn(String email, String pass,BuildContext context) async {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
-        Get.to(const HomeScreen());
+        Navigator.pushReplacementNamed(context, '/second');
       } else {
         Get.snackbar(
           'Login Failed',

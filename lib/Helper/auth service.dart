@@ -31,10 +31,11 @@ class FirebaseAuthServices {
       print(e);
       return false;
     }
-
-
-
   }
+
+
+
+
 
   Future<void> sign_Out() async {
     await auth.signOut();
