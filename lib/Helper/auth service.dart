@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class FirebaseAuthServices {
   static FirebaseAuthServices authServices = FirebaseAuthServices();
-
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> createAccountUsingEmail(String email, String password) async {
@@ -34,7 +33,10 @@ class FirebaseAuthServices {
   }
 
 
+  void signInWithGoogle(){
 
+    final Goo
+  }
 
 
   Future<void> sign_Out() async {
