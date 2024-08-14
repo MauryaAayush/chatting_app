@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                                   signUpController.isPasswordVisible.value
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Color(0xFF40744D),
+                                  color: const Color(0xFF40744D),
                                 ),
                                 onPressed: () {
                                   signUpController.isPasswordVisible.value =
