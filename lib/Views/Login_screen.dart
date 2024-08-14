@@ -63,11 +63,11 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     height: 220,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.elliptical(150, 120),
                       ),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         image: AssetImage(
                           'assets/pexels-photo-807598.jpeg',
                         ),
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     'Login',
                     style: GoogleFonts.ubuntu(
