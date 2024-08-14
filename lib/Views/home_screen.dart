@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       authController.name.value,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold
                       ),
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Text(
                       authController.email.value,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 15,
                           color: Colors.grey
                       ),
