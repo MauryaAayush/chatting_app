@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   AnimatedContainer(
                     duration: Duration(milliseconds: 300),
                     child: TextFormField(
