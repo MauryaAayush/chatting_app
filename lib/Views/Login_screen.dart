@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                       controller: controller.txtemail,
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color(0xFF40744D),
                         ),
                         prefixIcon: Icon(
