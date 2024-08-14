@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   ListTile(
-                    leading: Icon(Icons.phone),
+                    leading: const Icon(Icons.phone),
                     title: Text('Mobile Number'),
                     subtitle: Obx(() => Text(authController.phone.value)),
                   ),
