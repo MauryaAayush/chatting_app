@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Obx(
                         () =>
                         AnimatedContainer(
