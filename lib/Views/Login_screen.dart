@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     child: TextFormField(
                       controller: controller.txtemail,
                       decoration: InputDecoration(
