@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ListTile(
                     leading: const Icon(Icons.info),
-                    title: Text('About'),
+                    title: const Text('About'),
                     onTap: () {
                       // Handle the about tap
                     },
