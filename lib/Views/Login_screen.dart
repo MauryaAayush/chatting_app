@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                     style: GoogleFonts.ubuntu(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF40744D),
+                      color: const Color(0xFF40744D),
                     ),
                   ),
                   const SizedBox(height: 5),
