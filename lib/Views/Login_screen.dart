@@ -120,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                   Obx(
                         () =>
                         AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           child: TextFormField(
                             controller: controller.txtpass,
                             decoration: InputDecoration(
