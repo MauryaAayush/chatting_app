@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     leading: const Icon(Icons.phone),
-                    title: Text('Mobile Number'),
+                    title: const Text('Mobile Number'),
                     subtitle: Obx(() => Text(authController.phone.value)),
                   ),
                   ListTile(
