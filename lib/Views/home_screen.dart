@@ -56,8 +56,8 @@ class HomeScreen extends StatelessWidget {
                     subtitle: Obx(() => Text(authController.phone.value)),
                   ),
                   ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
+                    leading: const Icon(Icons.settings),
+                    title: const Text('Settings'),
                     onTap: () {
                       // Handle the settings tap
                     },
