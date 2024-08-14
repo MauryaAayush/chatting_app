@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0xFF40744D),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'Sign in to continue',
                     style: GoogleFonts.roboto(
