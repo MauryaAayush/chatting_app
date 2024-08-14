@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                       radius: 28,
                       backgroundImage: NetworkImage(authController.url.value),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       authController.name.value,
                       style: TextStyle(
