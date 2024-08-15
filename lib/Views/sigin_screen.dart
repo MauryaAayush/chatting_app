@@ -99,39 +99,36 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Obx(
-                        () => AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      child: TextFormField(
-                        controller: controller.txtpass,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(color: Color(0xFF40744D)),
-                          prefixIcon:
-                          Icon(Icons.lock, color: Color(0xFF40744D)),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              signUpController.isPasswordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Color(0xFF40744D),
+                        () => TextFormField(
+                          controller: controller.txtpass,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: const TextStyle(color: Color(0xFF40744D)),
+                            prefixIcon:
+                            const Icon(Icons.lock, color: Color(0xFF40744D)),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                signUpController.isPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: const Color(0xFF40744D),
+                              ),
+                              onPressed: () {
+                                signUpController.isPasswordVisible.value =
+                                !signUpController.isPasswordVisible.value;
+                              },
                             ),
-                            onPressed: () {
-                              signUpController.isPasswordVisible.value =
-                              !signUpController.isPasswordVisible.value;
-                            },
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
+                          obscureText: !signUpController.isPasswordVisible.value,
                         ),
-                        obscureText: !signUpController.isPasswordVisible.value,
-                      ),
-                    ),
                   ),
                   SizedBox(height: 20),
                   Obx(
