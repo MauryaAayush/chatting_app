@@ -124,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                           controller.txtpass.text, context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF40744D),
+                      backgroundColor: const Color(0xFF40744D),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
