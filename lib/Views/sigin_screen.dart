@@ -162,7 +162,7 @@ class SignUpPage extends StatelessWidget {
                           !signUpController.isConfirmPasswordVisible.value,
                         ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Obx(
