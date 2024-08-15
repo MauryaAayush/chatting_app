@@ -130,40 +130,37 @@ class SignUpPage extends StatelessWidget {
                           obscureText: !signUpController.isPasswordVisible.value,
                         ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Obx(
-                        () => AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          labelStyle: TextStyle(color: Color(0xFF40744D)),
-                          prefixIcon:
-                          Icon(Icons.lock, color: Color(0xFF40744D)),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              signUpController.isConfirmPasswordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Color(0xFF40744D),
+                        () => TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            labelStyle: TextStyle(color: Color(0xFF40744D)),
+                            prefixIcon:
+                            Icon(Icons.lock, color: Color(0xFF40744D)),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                signUpController.isConfirmPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Color(0xFF40744D),
+                              ),
+                              onPressed: () {
+                                signUpController.isConfirmPasswordVisible.value =
+                                !signUpController
+                                    .isConfirmPasswordVisible.value;
+                              },
                             ),
-                            onPressed: () {
-                              signUpController.isConfirmPasswordVisible.value =
-                              !signUpController
-                                  .isConfirmPasswordVisible.value;
-                            },
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
+                          obscureText:
+                          !signUpController.isConfirmPasswordVisible.value,
                         ),
-                        obscureText:
-                        !signUpController.isConfirmPasswordVisible.value,
-                      ),
-                    ),
                   ),
                   SizedBox(height: 10),
                   Row(
