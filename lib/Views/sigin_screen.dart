@@ -61,7 +61,8 @@ class SignUpPage extends StatelessWidget {
                   SizedBox(height: 30.h),
                   const CustomTextField(
                     label: 'Full Name',
-                    prefixIcon: Icons.person, controller: null,
+                    prefixIcon: Icons.person,
+                    controller: null,
                   ),
                   CustomTextField(
                     controller: controller.txtemail,
@@ -69,7 +70,7 @@ class SignUpPage extends StatelessWidget {
                     prefixIcon: Icons.email,
                   ),
                   Obx(
-                        () => CustomTextField(
+                    () => CustomTextField(
                       controller: controller.txtpass,
                       label: 'Password',
                       prefixIcon: Icons.lock,
@@ -83,17 +84,17 @@ class SignUpPage extends StatelessWidget {
                         ),
                         onPressed: () {
                           signUpController.isPasswordVisible.value =
-                          !signUpController.isPasswordVisible.value;
+                              !signUpController.isPasswordVisible.value;
                         },
                       ),
                     ),
                   ),
                   Obx(
-                        () => CustomTextField(
+                    () => CustomTextField(
                       label: 'Confirm Password',
                       prefixIcon: Icons.lock,
                       obscureText:
-                      !signUpController.isConfirmPasswordVisible.value,
+                          !signUpController.isConfirmPasswordVisible.value,
                       suffixIcon: IconButton(
                         icon: Icon(
                           signUpController.isConfirmPasswordVisible.value
@@ -103,7 +104,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         onPressed: () {
                           signUpController.isConfirmPasswordVisible.value =
-                          !signUpController.isConfirmPasswordVisible.value;
+                              !signUpController.isConfirmPasswordVisible.value;
                         },
                       ),
                     ),
@@ -111,7 +112,7 @@ class SignUpPage extends StatelessWidget {
                   Row(
                     children: [
                       Obx(
-                            () => Checkbox(
+                        () => Checkbox(
                           value: signUpController.agreeToTerms.value,
                           onChanged: (value) {
                             signUpController.agreeToTerms.value = value!;
