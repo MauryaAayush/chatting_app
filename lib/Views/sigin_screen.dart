@@ -87,7 +87,7 @@ class SignUpPage extends StatelessWidget {
                       labelStyle: const TextStyle(
                         color: Color(0xFF40744D),
                       ),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.email,
                         color: Color(0xFF40744D),
                       ),
