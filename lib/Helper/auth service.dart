@@ -25,7 +25,6 @@ class FirebaseAuthServices {
   }
 
 
-
   Future<bool> checkEmailExists(String email) async {
     try {
       List<String> signInMethods = await auth.fetchSignInMethodsForEmail(email);
@@ -35,9 +34,6 @@ class FirebaseAuthServices {
       return false;
     }
   }
-
-
-
 
 
   Future<void> sign_Out() async {
