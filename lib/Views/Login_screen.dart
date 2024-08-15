@@ -174,8 +174,12 @@ class LoginScreen extends StatelessWidget {
                       print(
                           'User signed in: ${FirebaseAuth.instance.currentUser!.email}');
                       // Navigate to the next screen
-                      Get.to(
-                          const HomeScreen()); // Replace with your actual home screen
+                      Get.off(
+                        const HomeScreen(),
+                        transition: Transition.downToUp, // Apply a fade-in transition
+                        duration: const Duration(milliseconds: 500), // Set the duration of the transition
+                      );
+
                     } else {
                       print('No user signed in');
                     }
