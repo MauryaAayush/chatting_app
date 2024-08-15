@@ -101,72 +101,72 @@ class SignUpPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Obx(
-                        () => TextFormField(
-                          controller: controller.txtpass,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                            prefixIcon:
+                    () => TextFormField(
+                      controller: controller.txtpass,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
+                        prefixIcon:
                             const Icon(Icons.lock, color: Color(0xFF40744D)),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                signUpController.isPasswordVisible.value
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: const Color(0xFF40744D),
-                              ),
-                              onPressed: () {
-                                signUpController.isPasswordVisible.value =
-                                !signUpController.isPasswordVisible.value;
-                              },
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide.none,
-                            ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            signUpController.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: const Color(0xFF40744D),
                           ),
-                          obscureText: !signUpController.isPasswordVisible.value,
+                          onPressed: () {
+                            signUpController.isPasswordVisible.value =
+                                !signUpController.isPasswordVisible.value;
+                          },
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      obscureText: !signUpController.isPasswordVisible.value,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Obx(
-                        () => TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                            prefixIcon:
+                    () => TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
+                        prefixIcon:
                             const Icon(Icons.lock, color: Color(0xFF40744D)),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                signUpController.isConfirmPasswordVisible.value
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: const Color(0xFF40744D),
-                              ),
-                              onPressed: () {
-                                signUpController.isConfirmPasswordVisible.value =
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            signUpController.isConfirmPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: const Color(0xFF40744D),
+                          ),
+                          onPressed: () {
+                            signUpController.isConfirmPasswordVisible.value =
                                 !signUpController
                                     .isConfirmPasswordVisible.value;
-                              },
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          obscureText:
-                          !signUpController.isConfirmPasswordVisible.value,
+                          },
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      obscureText:
+                          !signUpController.isConfirmPasswordVisible.value,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Row(
                     children: [
                       Obx(
-                            () => Checkbox(
+                        () => Checkbox(
                           value: signUpController.agreeToTerms.value,
                           onChanged: (value) {
                             signUpController.agreeToTerms.value = value!;
@@ -205,8 +205,8 @@ class SignUpPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 32),
                     ),
                     child: const Text(
                       'Sign Up',
@@ -225,7 +225,7 @@ class SignUpPage extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed('/login');
                         },
-                        child: Text(
+                        child: const Text(
                           'Login',
                           style: TextStyle(color: Color(0xFF40744D)),
                         ),
