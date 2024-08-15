@@ -1,27 +1,24 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-
 import '../Components/custom_button.dart';
 import '../Components/custom_textfield.dart';
 import '../Controller/controller.dart';
-import '../Controller/signUp_controller.dart';
+import '../Controller/signIn_and_signUp_controller.dart';
 import '../Helper/google_services.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  final signUpController = Get.put(SignUpController());
+  final loginController = Get.put(LoginController());
+  final authController = Get.put(AuthController());
 
   LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(AuthController());
-
     return Scaffold(
       body: Stack(
         children: [
@@ -31,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 220.h,
+                    height: 200.h,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -56,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    'Sign in to continue',
+                    'Log in to continue',
                     style: GoogleFonts.roboto(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
@@ -65,30 +62,29 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   CustomTextField(
-                    controller: controller.txtemail,
-                    labelText: 'Email',
+                    controller: loginController.txtemail,
+                    label: 'Email',
                     prefixIcon: Icons.email,
                   ),
                   SizedBox(height: 20.h),
                   Obx(
                         () => CustomTextField(
-                      controller: controller.txtpass,
-                      labelText: 'Password',
+                      label: 'Password',
                       prefixIcon: Icons.lock,
-                      isPassword: true,
-                      obscureText: !signUpController.isPasswordVisible.value,
-                      togglePasswordVisibility: () {
-                        signUpController.isPasswordVisible.value =
-                        !signUpController.isPasswordVisible.value;
-                      },
+                      obscureText: loginController.isPasswordVisible.value,
+                      controller: loginController.txtpass,
+
                     ),
                   ),
                   SizedBox(height: 28.h),
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
-                      controller.signIn(
-                          controller.txtemail.text, controller.txtpass.text, context);
+                      authController.signIn(
+                        loginController.txtemail.text,
+                        loginController.txtpass.text,
+                        context,
+                      );
                     },
                   ),
                   SizedBox(height: 20.h),
@@ -120,22 +116,22 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 20.h),
-                  SignInButton(Buttons.google, onPressed: () async {
-                    await GoogleLoginServices.googleLoginServices
-                        .signInWithGoogle();
-
-                    if (FirebaseAuth.instance.currentUser != null) {
-                      print(
-                          'User signed in: ${FirebaseAuth.instance.currentUser!.email}');
-                      Get.off(
-                        const HomeScreen(),
-                        transition: Transition.downToUp,
-                        duration: const Duration(milliseconds: 500),
-                      );
-                    } else {
-                      print('No user signed in');
-                    }
-                  }),
+                  SignInButton(
+                    Buttons.google,
+                    onPressed: () async {
+                      await GoogleLoginServices.googleLoginServices.signInWithGoogle();
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        print('User signed in: ${FirebaseAuth.instance.currentUser!.email}');
+                        Get.off(
+                          const HomeScreen(),
+                          transition: Transition.downToUp,
+                          duration: const Duration(milliseconds: 500),
+                        );
+                      } else {
+                        print('No user signed in');
+                      }
+                    },
+                  ),
                   SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

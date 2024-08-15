@@ -2,49 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String labelText;
+  final TextEditingController? controller;
+  final String label;
   final IconData prefixIcon;
-  final bool isPassword;
   final bool obscureText;
-  final VoidCallback? togglePasswordVisibility;
+  final Widget? suffixIcon;
 
   const CustomTextField({
     Key? key,
-    required this.controller,
-    required this.labelText,
+    this.controller,
+    required this.label,
     required this.prefixIcon,
-    this.isPassword = false,
     this.obscureText = false,
-    this.togglePasswordVisibility,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(
-          color: const Color(0xFF40744D),
-          fontSize: 16.sp,
-        ),
-        prefixIcon: Icon(prefixIcon, color: const Color(0xFF40744D)),
-        suffixIcon: isPassword
-            ? IconButton(
-          icon: Icon(
-            obscureText ? Icons.visibility : Icons.visibility_off,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(
             color: const Color(0xFF40744D),
+            fontSize: 16.sp,
           ),
-          onPressed: togglePasswordVisibility,
-        )
-            : null,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.r),
-          borderSide: BorderSide.none,
+          prefixIcon: Icon(prefixIcon, color: const Color(0xFF40744D)),
+          suffixIcon: suffixIcon,
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.r),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );

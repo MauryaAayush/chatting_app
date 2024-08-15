@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Components/custom_button.dart';
+import '../Components/custom_textfield.dart';
 import '../Controller/controller.dart';
-import '../Controller/signUp_controller.dart';
+import '../Controller/signIn_and_signUp_controller.dart';
 
 class SignUpPage extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
@@ -22,7 +26,7 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 220,
+                    height: 200.h,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -36,131 +40,78 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   Text(
                     'Create Account',
                     style: GoogleFonts.ubuntu(
-                      fontSize: 32,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF40744D),
+                      color: const Color(0xFF40744D),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Text(
                     'Sign up to get started',
                     style: GoogleFonts.roboto(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      labelStyle: const TextStyle(
-                        color: Color(0xFF40744D),
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.person,
-                        color: Color(0xFF40744D),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                  SizedBox(height: 30.h),
+                  const CustomTextField(
+                    label: 'Full Name',
+                    prefixIcon: Icons.person, controller: null,
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
+                  CustomTextField(
                     controller: controller.txtemail,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: const TextStyle(
-                        color: Color(0xFF40744D),
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: Color(0xFF40744D),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    label: 'Email',
+                    prefixIcon: Icons.email,
                   ),
-                  const SizedBox(height: 20),
                   Obx(
-                    () => TextFormField(
+                        () => CustomTextField(
                       controller: controller.txtpass,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                        prefixIcon:
-                            const Icon(Icons.lock, color: Color(0xFF40744D)),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            signUpController.isPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: const Color(0xFF40744D),
-                          ),
-                          onPressed: () {
-                            signUpController.isPasswordVisible.value =
-                                !signUpController.isPasswordVisible.value;
-                          },
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      label: 'Password',
+                      prefixIcon: Icons.lock,
                       obscureText: !signUpController.isPasswordVisible.value,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Obx(
-                    () => TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                        prefixIcon:
-                            const Icon(Icons.lock, color: Color(0xFF40744D)),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            signUpController.isConfirmPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: const Color(0xFF40744D),
-                          ),
-                          onPressed: () {
-                            signUpController.isConfirmPasswordVisible.value =
-                                !signUpController
-                                    .isConfirmPasswordVisible.value;
-                          },
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          signUpController.isPasswordVisible.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: const Color(0xFF40744D),
                         ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
+                        onPressed: () {
+                          signUpController.isPasswordVisible.value =
+                          !signUpController.isPasswordVisible.value;
+                        },
                       ),
-                      obscureText:
-                          !signUpController.isConfirmPasswordVisible.value,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  Obx(
+                        () => CustomTextField(
+                      label: 'Confirm Password',
+                      prefixIcon: Icons.lock,
+                      obscureText:
+                      !signUpController.isConfirmPasswordVisible.value,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          signUpController.isConfirmPasswordVisible.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: const Color(0xFF40744D),
+                        ),
+                        onPressed: () {
+                          signUpController.isConfirmPasswordVisible.value =
+                          !signUpController.isConfirmPasswordVisible.value;
+                        },
+                      ),
+                    ),
+                  ),
                   Row(
                     children: [
                       Obx(
-                        () => Checkbox(
+                            () => Checkbox(
                           value: signUpController.agreeToTerms.value,
                           onChanged: (value) {
                             signUpController.agreeToTerms.value = value!;
@@ -176,8 +127,9 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 28),
-                  ElevatedButton(
+                  SizedBox(height: 28.h),
+                  CustomButton(
+                    text: 'Sign Up',
                     onPressed: () {
                       if (signUpController.agreeToTerms.value) {
                         controller.signUp(
@@ -194,20 +146,8 @@ class SignUpPage extends StatelessWidget {
                         );
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF40744D),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 32),
-                    ),
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(color: Colors.white),
-                    ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
