@@ -30,7 +30,7 @@ class SignUpPage extends StatelessWidget {
                   Container(
                     height: 220,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.elliptical(150, 120),
                       ),
@@ -42,7 +42,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     'Create Account',
                     style: GoogleFonts.ubuntu(
@@ -51,7 +51,7 @@ class SignUpPage extends StatelessWidget {
                       color: Color(0xFF40744D),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'Sign up to get started',
                     style: GoogleFonts.roboto(
@@ -61,24 +61,21 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Full Name',
-                        labelStyle: TextStyle(
-                          color: Color(0xFF40744D),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Color(0xFF40744D),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Full Name',
+                      labelStyle: const TextStyle(
+                        color: Color(0xFF40744D),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.person,
+                        color: Color(0xFF40744D),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
                       ),
                     ),
                   ),
@@ -238,7 +235,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.to(()=> LoginScreen());
+                          Navigator.of(context).pushReplacementNamed('/login');
                         },
                         child: Text(
                           'Login',

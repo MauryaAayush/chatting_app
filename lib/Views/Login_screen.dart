@@ -155,33 +155,30 @@ class LoginScreen extends StatelessWidget {
                         ),
                   ),
                   const SizedBox(height: 28),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        controller.signIn(
-                            controller.txtemail.text,
-                            controller.txtpass.text,
-                            context
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF40744D),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 15,
-                          horizontal: 80,
-                        ),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.signIn(
+                          controller.txtemail.text,
+                          controller.txtpass.text,
+                          context
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF40744D),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
-                        'Login',
-                        style: GoogleFonts.ubuntu(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15,
+                        horizontal: 80,
+                      ),
+                    ),
+                    child: Text(
+                      'Login',
+                      style: GoogleFonts.ubuntu(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -237,7 +234,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.to(SignUpPage());
+                          Navigator.pushReplacementNamed(context, '/signup');
                         },
                         child: const Text(
                           'Sign Up',
