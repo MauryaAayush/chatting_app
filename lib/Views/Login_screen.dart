@@ -1,4 +1,3 @@
-
 import 'package:chatting_app/Helper/google_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,39 +12,6 @@ class LoginScreen extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
 
   LoginScreen({super.key});
-  // final GoogleSignIn googleSignIn = GoogleSignIn();
-
-
-  // Future<UserCredential> signInWithGoogle() async{
-  //
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  //
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-  //
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth?.accessToken,
-  //     idToken: googleAuth?.idToken,
-  //   );
-  //     // final GoogleSignInAccount? googleSignInAccount = await googleSignIn
-  //     //     .signIn();
-  //     // final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!
-  //     //     .authentication;
-  //     //
-  //     // final AuthCredential credential = GoogleAuthProvider.credential(
-  //     //     accessToken: googleSignInAuthentication.accessToken,
-  //     //     idToken: googleSignInAuthentication.idToken
-  //     // );
-  //
-  //     // final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-  //     // final User? user = userCredential.user;
-  //
-  //     return await FirebaseAuth.instance.signInWithCredential(credential);
-  //
-  //   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -117,50 +83,45 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Obx(
-                        () =>
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          child: TextFormField(
-                            controller: controller.txtpass,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                              prefixIcon: const Icon(
-                                Icons.lock,
-                                color: Color(0xFF40744D),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  signUpController.isPasswordVisible.value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: const Color(0xFF40744D),
-                                ),
-                                onPressed: () {
-                                  signUpController.isPasswordVisible.value =
-                                  !signUpController.isPasswordVisible.value;
-                                },
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide.none,
-                              ),
+                    () => AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      child: TextFormField(
+                        controller: controller.txtpass,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          labelStyle: const TextStyle(color: Color(0xFF40744D)),
+                          prefixIcon: const Icon(
+                            Icons.lock,
+                            color: Color(0xFF40744D),
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              signUpController.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: const Color(0xFF40744D),
                             ),
-                            obscureText: !signUpController.isPasswordVisible
-                                .value,
+                            onPressed: () {
+                              signUpController.isPasswordVisible.value =
+                                  !signUpController.isPasswordVisible.value;
+                            },
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none,
                           ),
                         ),
+                        obscureText: !signUpController.isPasswordVisible.value,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 28),
                   ElevatedButton(
                     onPressed: () {
-                      controller.signIn(
-                          controller.txtemail.text,
-                          controller.txtpass.text,
-                          context
-                      );
+                      controller.signIn(controller.txtemail.text,
+                          controller.txtpass.text, context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF40744D),
@@ -211,17 +172,19 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   SignInButton(Buttons.google, onPressed: () async {
-                    await GoogleLoginServices.googleLoginServices.signInWithGoogle();
+                    await GoogleLoginServices.googleLoginServices
+                        .signInWithGoogle();
 
                     // Check if the user is signed in
                     if (FirebaseAuth.instance.currentUser != null) {
-                      print('User signed in: ${FirebaseAuth.instance.currentUser!.email}');
+                      print(
+                          'User signed in: ${FirebaseAuth.instance.currentUser!.email}');
                       // Navigate to the next screen
-                      Get.to(const HomeScreen());  // Replace with your actual home screen
+                      Get.to(
+                          const HomeScreen()); // Replace with your actual home screen
                     } else {
                       print('No user signed in');
                     }
-
                   }),
                   const SizedBox(height: 10),
                   Row(
@@ -240,7 +203,6 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(color: Color(0xFF40744D)),
                         ),
                       ),
-
                     ],
                   ),
                   const SizedBox(height: 30),
