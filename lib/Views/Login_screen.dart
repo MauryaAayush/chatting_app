@@ -59,18 +59,47 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    child: TextFormField(
-                      controller: controller.txtemail,
+                  TextFormField(
+                    controller: controller.txtemail,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: const TextStyle(
+                        color: Color(0xFF40744D),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: Color(0xFF40744D),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Obx(
+                    () => TextFormField(
+                      controller: controller.txtpass,
                       decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: const TextStyle(
+                        labelText: 'Password',
+                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
+                        prefixIcon: const Icon(
+                          Icons.lock,
                           color: Color(0xFF40744D),
                         ),
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Color(0xFF40744D),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            signUpController.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: const Color(0xFF40744D),
+                          ),
+                          onPressed: () {
+                            signUpController.isPasswordVisible.value =
+                                !signUpController.isPasswordVisible.value;
+                          },
                         ),
                         filled: true,
                         fillColor: Colors.white,
@@ -79,42 +108,7 @@ class LoginScreen extends StatelessWidget {
                           borderSide: BorderSide.none,
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Obx(
-                    () => AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      child: TextFormField(
-                        controller: controller.txtpass,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                          prefixIcon: const Icon(
-                            Icons.lock,
-                            color: Color(0xFF40744D),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              signUpController.isPasswordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: const Color(0xFF40744D),
-                            ),
-                            onPressed: () {
-                              signUpController.isPasswordVisible.value =
-                                  !signUpController.isPasswordVisible.value;
-                            },
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                        obscureText: !signUpController.isPasswordVisible.value,
-                      ),
+                      obscureText: !signUpController.isPasswordVisible.value,
                     ),
                   ),
                   const SizedBox(height: 28),
