@@ -201,23 +201,23 @@ class SignUpPage extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF40744D),
+                      backgroundColor: const Color(0xFF40744D),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding:
-                      EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Sign Up',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Already have an account?",
                         style: TextStyle(color: Colors.grey),
                       ),
