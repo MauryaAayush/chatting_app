@@ -171,7 +171,7 @@ class SignUpPage extends StatelessWidget {
                           onChanged: (value) {
                             signUpController.agreeToTerms.value = value!;
                           },
-                          activeColor: Color(0xFF40744D),
+                          activeColor: const Color(0xFF40744D),
                         ),
                       ),
                       Expanded(
