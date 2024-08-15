@@ -1,13 +1,12 @@
-import 'package:chatting_app/Helper/auth%20service.dart';
+
 import 'package:chatting_app/Helper/google_services.dart';
-import 'package:chatting_app/Views/sigin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import '../Controller/controller.dart';
+import '../Controller/signUp_controller.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
