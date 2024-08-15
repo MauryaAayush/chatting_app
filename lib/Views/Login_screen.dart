@@ -1,11 +1,16 @@
-import 'package:chatting_app/Helper/google_services.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sign_in_button/sign_in_button.dart';
+
+import '../Components/custom_button.dart';
+import '../Components/custom_textfield.dart';
 import '../Controller/controller.dart';
 import '../Controller/signUp_controller.dart';
+import '../Helper/google_services.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -26,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 220,
+                    height: 220.h,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -40,103 +45,53 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   Text(
                     'Login',
                     style: GoogleFonts.ubuntu(
-                      fontSize: 32,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF40744D),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Text(
                     'Sign in to continue',
                     style: GoogleFonts.roboto(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  TextFormField(
+                  SizedBox(height: 30.h),
+                  CustomTextField(
                     controller: controller.txtemail,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: const TextStyle(
-                        color: Color(0xFF40744D),
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: Color(0xFF40744D),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    labelText: 'Email',
+                    prefixIcon: Icons.email,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Obx(
-                    () => TextFormField(
+                        () => CustomTextField(
                       controller: controller.txtpass,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: const TextStyle(color: Color(0xFF40744D)),
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                          color: Color(0xFF40744D),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            signUpController.isPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: const Color(0xFF40744D),
-                          ),
-                          onPressed: () {
-                            signUpController.isPasswordVisible.value =
-                                !signUpController.isPasswordVisible.value;
-                          },
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                      labelText: 'Password',
+                      prefixIcon: Icons.lock,
+                      isPassword: true,
                       obscureText: !signUpController.isPasswordVisible.value,
+                      togglePasswordVisibility: () {
+                        signUpController.isPasswordVisible.value =
+                        !signUpController.isPasswordVisible.value;
+                      },
                     ),
                   ),
-                  const SizedBox(height: 28),
-                  ElevatedButton(
+                  SizedBox(height: 28.h),
+                  CustomButton(
+                    text: 'Login',
                     onPressed: () {
-                      controller.signIn(controller.txtemail.text,
-                          controller.txtpass.text, context);
+                      controller.signIn(
+                          controller.txtemail.text, controller.txtpass.text, context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF40744D),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 80,
-                      ),
-                    ),
-                    child: Text(
-                      'Login',
-                      style: GoogleFonts.ubuntu(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Row(
                     children: [
                       Expanded(
@@ -146,11 +101,11 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
                         child: Text(
                           'OR',
                           style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             color: Colors.grey,
                             fontWeight: FontWeight.w500,
                           ),
@@ -164,46 +119,46 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   SignInButton(Buttons.google, onPressed: () async {
                     await GoogleLoginServices.googleLoginServices
                         .signInWithGoogle();
 
-                    // Check if the user is signed in
                     if (FirebaseAuth.instance.currentUser != null) {
                       print(
                           'User signed in: ${FirebaseAuth.instance.currentUser!.email}');
-                      // Navigate to the next screen
                       Get.off(
                         const HomeScreen(),
-                        transition: Transition.downToUp, // Apply a fade-in transition
-                        duration: const Duration(milliseconds: 500), // Set the duration of the transition
+                        transition: Transition.downToUp,
+                        duration: const Duration(milliseconds: 500),
                       );
-
                     } else {
                       print('No user signed in');
                     }
                   }),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Don't have an account?",
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey, fontSize: 14.sp),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/signup');
                         },
-                        child: const Text(
+                        child: Text(
                           'Sign Up',
-                          style: TextStyle(color: Color(0xFF40744D)),
+                          style: TextStyle(
+                            color: const Color(0xFF40744D),
+                            fontSize: 14.sp,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                 ],
               ),
             ),
