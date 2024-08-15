@@ -174,7 +174,7 @@ class SignUpPage extends StatelessWidget {
                           activeColor: const Color(0xFF40744D),
                         ),
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Text(
                           'I agree to the Terms and Conditions',
                           style: TextStyle(color: Color(0xFF40744D)),
@@ -182,38 +182,35 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 28),
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (signUpController.agreeToTerms.value) {
-                          controller.signUp(
-                            controller.txtemail.text,
-                            controller.txtpass.text,
-                          );
-                        } else {
-                          Get.snackbar(
-                            'Terms and Conditions',
-                            'You must agree to the terms and conditions to sign up.',
-                            snackPosition: SnackPosition.TOP,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF40744D),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        padding:
-                        EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  const SizedBox(height: 28),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (signUpController.agreeToTerms.value) {
+                        controller.signUp(
+                          controller.txtemail.text,
+                          controller.txtpass.text,
+                        );
+                      } else {
+                        Get.snackbar(
+                          'Terms and Conditions',
+                          'You must agree to the terms and conditions to sign up.',
+                          snackPosition: SnackPosition.TOP,
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF40744D),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      padding:
+                      EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                    ),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   SizedBox(height: 10),
