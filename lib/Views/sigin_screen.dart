@@ -135,7 +135,7 @@ class SignUpPage extends StatelessWidget {
                         () => TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Confirm Password',
-                            labelStyle: TextStyle(color: Color(0xFF40744D)),
+                            labelStyle: const TextStyle(color: Color(0xFF40744D)),
                             prefixIcon:
                             Icon(Icons.lock, color: Color(0xFF40744D)),
                             suffixIcon: IconButton(
