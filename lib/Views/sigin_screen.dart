@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Controller/controller.dart';
-import 'Login_screen.dart';
-
-class SignUpController extends GetxController {
-  var isPasswordVisible = false.obs;
-  var isConfirmPasswordVisible = false.obs;
-  var agreeToTerms = false.obs;
-}
+import '../Controller/signUp_controller.dart';
 
 class SignUpPage extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
