@@ -79,26 +79,23 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    child: TextFormField(
-                      controller: controller.txtemail,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                          color: Color(0xFF40744D),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Color(0xFF40744D),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: controller.txtemail,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: const TextStyle(
+                        color: Color(0xFF40744D),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Color(0xFF40744D),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
                       ),
                     ),
                   ),
