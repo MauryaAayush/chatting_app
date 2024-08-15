@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-
 class FirebaseAuthServices {
   static FirebaseAuthServices authServices = FirebaseAuthServices();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,7 +22,6 @@ class FirebaseAuthServices {
     }
   }
 
-
   Future<bool> checkEmailExists(String email) async {
     try {
       List<String> signInMethods = await auth.fetchSignInMethodsForEmail(email);
@@ -41,5 +39,4 @@ class FirebaseAuthServices {
       Get.back();
     }
   }
-
 }
