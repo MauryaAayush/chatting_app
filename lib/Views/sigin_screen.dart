@@ -137,7 +137,7 @@ class SignUpPage extends StatelessWidget {
                             labelText: 'Confirm Password',
                             labelStyle: const TextStyle(color: Color(0xFF40744D)),
                             prefixIcon:
-                            Icon(Icons.lock, color: Color(0xFF40744D)),
+                            const Icon(Icons.lock, color: Color(0xFF40744D)),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 signUpController.isConfirmPasswordVisible.value
