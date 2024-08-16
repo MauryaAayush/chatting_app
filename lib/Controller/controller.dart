@@ -29,8 +29,8 @@ class AuthController extends GetxController {
     User? user = GoogleLoginServices.googleLoginServices.currentUser();
     if (user != null) {
       email.value = user.email!;
-      url.value = user.photoURL!;
-      name.value = user.displayName!;
+      url.value = user.photoURL ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqTrWRudq0k-8_zKLq7vjnXPvdSkznOmyjQ&s";
+      name.value = user.displayName ?? "user name";
       phone.value = user.phoneNumber ?? "no number";
       log('-----------------------------------');
       log(email.value);
