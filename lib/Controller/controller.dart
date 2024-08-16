@@ -61,6 +61,8 @@ class AuthController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
+        Get.offNamed('/login');
+        // Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (e) {
       Get.snackbar(
@@ -73,11 +75,12 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signIn(String email, String pass,BuildContext context) async {
+  Future<void> signIn(String email, String pass) async {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
-        Navigator.pushReplacementNamed(context, '/second');
+        Get.offNamed( '/home');
+        // Navigator.pushReplacementNamed(context,);
       } else {
         Get.snackbar(
           'Login Failed',

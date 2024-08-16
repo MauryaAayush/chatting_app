@@ -83,7 +83,6 @@ class LoginScreen extends StatelessWidget {
                       authController.signIn(
                         loginController.txtemail.text,
                         loginController.txtpass.text,
-                        context,
                       );
                     },
                   ),
