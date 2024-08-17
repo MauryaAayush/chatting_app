@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Controller/controller.dart';
-import 'Login_screen.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the AuthController using Get.put
     AuthController authController = Get.put(AuthController());
 
     return Scaffold(
@@ -22,23 +24,23 @@ class HomeScreen extends StatelessWidget {
                     () => Column(
                   children: [
                     CircleAvatar(
-                      radius: 28,
+                      radius: 28.r, // Responsive radius
                       backgroundImage: NetworkImage(authController.url.value),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h), // Responsive height
                     Text(
                       authController.name.value,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
+                      style: TextStyle(
+                        fontSize: 20.sp, // Responsive font size
+                        fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       authController.email.value,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey
+                      style: TextStyle(
+                        fontSize: 15.sp, // Responsive font size
+                        color: Colors.grey,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -51,20 +53,27 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.phone),
-                    title: const Text('Mobile Number'),
+                    leading: Icon(Icons.home, size: 24.r), // Responsive icon size
+                    title: Text('Home', style: TextStyle(fontSize: 16.sp)), // Responsive font size
+                    onTap: () {
+                      Get.offNamed('/home');
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.phone, size: 24.r), // Responsive icon size
+                    title: Text('Mobile Number', style: TextStyle(fontSize: 16.sp)), // Responsive font size
                     subtitle: Obx(() => Text(authController.phone.value)),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Settings'),
+                    leading: Icon(Icons.settings, size: 24.r), // Responsive icon size
+                    title: Text('Settings', style: TextStyle(fontSize: 16.sp)), // Responsive font size
                     onTap: () {
                       Get.toNamed('/setting');
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.info),
-                    title: const Text('About'),
+                    leading: Icon(Icons.info, size: 24.r), // Responsive icon size
+                    title: Text('About', style: TextStyle(fontSize: 16.sp)), // Responsive font size
                     onTap: () {
                       // Handle the about tap
                     },
@@ -77,7 +86,7 @@ class HomeScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Home Screen'),
+        title: Text('Home Screen', style: TextStyle(fontSize: 20.sp)), // Responsive font size
         actions: [
           IconButton(
             onPressed: () {
@@ -89,16 +98,16 @@ class HomeScreen extends StatelessWidget {
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.black,
                 textColor: Colors.white,
-                fontSize: 16.0,
+                fontSize: 16.sp, // Responsive font size
               );
               Get.off(() => LoginScreen());
             },
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout, size: 24.r), // Responsive icon size
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Home Screen'),
+      body: Center(
+        child: Text('Home Screen', style: TextStyle(fontSize: 16.sp)), // Responsive font size
       ),
     );
   }
