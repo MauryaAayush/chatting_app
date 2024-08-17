@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'Views/Login_screen.dart';
 import 'Views/home_screen.dart';
+import 'Views/setting_screen.dart';
 import 'Views/sigin_screen.dart';
 import 'firebase_options.dart';
 
@@ -50,6 +51,12 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: '/home',
             page: () => const HomeScreen(),
+            transition: Transition.fadeIn,
+            transitionDuration: const Duration(milliseconds: 500),
+          ),
+          GetPage(
+            name: '/setting',
+            page: () => const SettingScreen(),
             transition: Transition.fadeIn,
             transitionDuration: const Duration(milliseconds: 500),
           ),
