@@ -86,7 +86,6 @@ class CustomDrawer extends StatelessWidget {
               ),
             ],
           ),
-          //   logoutlist tile
           Padding(
             padding: const EdgeInsets.only(left: 25,bottom: 25),
             child: ListTile(
