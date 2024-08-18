@@ -77,7 +77,7 @@ class CustomDrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   leading: Icon(Icons.settings, size: 24.r,color: Theme.of(context).colorScheme.primary,), // Responsive icon size
-                  title: Text('S E T T I N G S'), // Responsive font size
+                  title: const Text('S E T T I N G S'), // Responsive font size
                   onTap: () {
                     Get.toNamed('/setting');
                   },
