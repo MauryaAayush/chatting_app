@@ -7,7 +7,7 @@ import '../Theme/light_theme.dart';
 
 class ThemeController extends GetxController {
   // Using a reactive variable
-  Rx<ThemeData> _themeData = lightTheme.obs;
+  final Rx<ThemeData> _themeData = lightTheme.obs;
 
   // Getter for themeData
   ThemeData get themeData => _themeData.value;
