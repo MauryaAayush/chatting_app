@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:chatting_app/Helper/auth%20service.dart';
 import 'package:chatting_app/Helper/google_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +12,13 @@ import '../Views/home_screen.dart';
 class AuthController extends GetxController {
   TextEditingController txtemail = TextEditingController();
   TextEditingController txtpass = TextEditingController();
+  TextEditingController txtname = TextEditingController();
+  TextEditingController txtmobile = TextEditingController();
 
   RxString email = ''.obs;
   RxString name = ''.obs;
   RxString url = ''.obs;
   RxString phone = ''.obs;
-
 
   @override
   void onInit() {
@@ -25,11 +26,12 @@ class AuthController extends GetxController {
     getUserDetails();
   }
 
-  void getUserDetails(){
+  void getUserDetails() {
     User? user = GoogleLoginServices.googleLoginServices.currentUser();
     if (user != null) {
       email.value = user.email!;
-      url.value = user.photoURL ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqTrWRudq0k-8_zKLq7vjnXPvdSkznOmyjQ&s";
+      url.value = user.photoURL ??
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqTrWRudq0k-8_zKLq7vjnXPvdSkznOmyjQ&s";
       name.value = user.displayName ?? "user name";
       phone.value = user.phoneNumber ?? "no number";
       log('-----------------------------------');
@@ -40,10 +42,11 @@ class AuthController extends GetxController {
     }
   }
 
-
-  Future<void> signUp(String email, String pass) async {
+  Future<void> signUp(
+      String fullName, String mobileNumber, String email, String pass) async {
     try {
-      bool emailExists = await FirebaseAuthServices.authServices.checkEmailExists(email);
+      bool emailExists =
+          await FirebaseAuthServices.authServices.checkEmailExists(email);
       if (emailExists) {
         Get.snackbar(
           'Sign Up Failed',
@@ -53,7 +56,24 @@ class AuthController extends GetxController {
           colorText: Colors.white,
         );
       } else {
-        await FirebaseAuthServices.authServices.createAccountUsingEmail(email, pass);
+        // Create user in Firebase Authentication
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: pass,
+        );
+
+        // If successful, store user data in Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'fullName': fullName,
+          'mobileNumber': mobileNumber,
+          'email': email,
+          'createdAt': DateTime.now(),
+        });
+
         Get.snackbar(
           'Sign Up',
           'Sign Up Successfully',
@@ -62,7 +82,6 @@ class AuthController extends GetxController {
           colorText: Colors.white,
         );
         Get.offNamed('/login');
-        // Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (e) {
       Get.snackbar(
@@ -79,8 +98,7 @@ class AuthController extends GetxController {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
-        Get.offNamed( '/home');
-        // Navigator.pushReplacementNamed(context,);
+        Get.offNamed('/home');
       } else {
         Get.snackbar(
           'Login Failed',
@@ -101,9 +119,8 @@ class AuthController extends GetxController {
     }
   }
 
-  void logOut(){
+  void logOut() {
     FirebaseAuthServices.authServices.sign_Out();
     GoogleLoginServices.googleLoginServices.logOut();
   }
-
 }

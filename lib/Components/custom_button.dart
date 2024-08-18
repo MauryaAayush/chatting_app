@@ -22,15 +22,15 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.r),
         ),
         padding: EdgeInsets.symmetric(
-          vertical: 15.h,
-          horizontal: 80.w,
+          vertical: 13.h,
+          horizontal: 70.w,
         ),
       ),
       child: Text(
         text,
         style: GoogleFonts.ubuntu(
           color: Colors.white,
-          fontSize: 18.sp,
+          fontSize: 16.sp,
           fontWeight: FontWeight.bold,
         ),
       ),

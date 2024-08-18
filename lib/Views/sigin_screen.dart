@@ -11,7 +11,7 @@ import '../Controller/signIn_and_signUp_controller.dart';
 class SignUpPage extends StatelessWidget {
   final signUpController = Get.put(SignUpController());
 
-  SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 200.h,
+                    height: 180.h,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -44,7 +44,7 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Create Account',
                     style: GoogleFonts.ubuntu(
-                      fontSize: 32.sp,
+                      fontSize: 26.sp,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF40744D),
                     ),
@@ -53,16 +53,21 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Sign up to get started',
                     style: GoogleFonts.roboto(
-                      fontSize: 18.sp,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 30.h),
-                  const CustomTextField(
+                  SizedBox(height: 10.h),
+                   CustomTextField(
                     label: 'Full Name',
                     prefixIcon: Icons.person,
-                    controller: null,
+                    controller: controller.txtname,
+                  ),
+                  CustomTextField(
+                    controller: controller.txtmobile,
+                    label: 'Phone',
+                    prefixIcon: Icons.phone,
                   ),
                   CustomTextField(
                     controller: controller.txtemail,
@@ -128,7 +133,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 28.h),
+                  SizedBox(height: 8.h),
                   CustomButton(
                     text: 'Sign Up',
                     onPressed: () {
@@ -136,6 +141,8 @@ class SignUpPage extends StatelessWidget {
                         controller.signUp(
                           controller.txtemail.text,
                           controller.txtpass.text,
+                          controller.txtmobile.text,
+                          controller.txtname.text,
                         );
                       } else {
                         Get.snackbar(
