@@ -8,8 +8,6 @@ class SignUpController extends GetxController {
 }
 
 
-
-
 class LoginController extends GetxController {
   final txtemail = TextEditingController();
   final txtpass = TextEditingController();
