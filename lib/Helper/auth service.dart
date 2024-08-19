@@ -7,7 +7,8 @@ class FirebaseAuthServices {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> createAccountUsingEmail(String email, String password, String name, String mobile) async {
+  Future<void> createAccountUsingEmail(
+      String email, String password, String name, String mobile) async {
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
