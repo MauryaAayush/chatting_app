@@ -57,7 +57,7 @@ class AuthController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-      //   sir wait
+
       } else {
         await FirebaseAuthServices.authServices.createAccountUsingEmail(email, password,name,mobile).then(
           (value) {
