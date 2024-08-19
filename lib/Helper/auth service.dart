@@ -14,7 +14,7 @@ class FirebaseAuthServices {
 
     print('-------------------create function called--------------------------');
 
-    // ye call ho raha hai
+
     try {
       print('------------------ Starting---------------------------------');
       log("Sign Up Email : $email\n Password : $password");
