@@ -144,8 +144,6 @@ class SignUpPage extends StatelessWidget {
                           controller.txtmobile.text,
                           controller.txtemail.text,
                           controller.txtpass.text,
-
-
                         );
                       } else {
                         Get.snackbar(
