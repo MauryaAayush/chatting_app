@@ -54,7 +54,6 @@ class FirebaseAuthServices {
     }
   }
 
-  // Chat GPT sir Nice
 
   Future<bool> checkEmailExists(String email) async {
     try {
