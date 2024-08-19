@@ -21,8 +21,8 @@ class AuthController extends GetxController {
   RxString url = ''.obs;
   RxString mobile = ''.obs;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
@@ -46,10 +46,14 @@ class AuthController extends GetxController {
     }
   }
 
+  // kaha problem hoga sir bas tum dekho
+
+
   Future<void> signUp(
-      String email, String pass, String name, String mobile) async {
+      String name, String mobile, String email, String password) async {
     try {
       bool emailExists = await FirebaseAuthServices.authServices.checkEmailExists(email);
+      log("Email is Exists : $emailExists");
       if (emailExists) {
         Get.snackbar(
           'Sign Up Failed',
@@ -58,16 +62,21 @@ class AuthController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
+      //   sir wait
       } else {
-        await FirebaseAuthServices.authServices.createAccountUsingEmail(email, pass,name,mobile);
-        Get.snackbar(
-          'Sign Up',
-          'Sign Up Successfully',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
+        await FirebaseAuthServices.authServices.createAccountUsingEmail(email, password,name,mobile).then(
+          (value) {
+            Get.snackbar(
+              'Sign Up',
+              'Sign Up Successfully',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white,
+            );
+            Get.offNamed('/login');
+          },
         );
-        Get.offNamed('/login');
+
         // Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (e) {
