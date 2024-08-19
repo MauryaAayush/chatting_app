@@ -60,20 +60,21 @@ class AuthController extends GetxController {
         );
       } else {
         await FirebaseAuthServices.authServices.createAccountUsingEmail(email, pass,name,mobile);
-
-        User? user = _auth.currentUser;
-        if(user != null){
-          await _firestore.collection('User').doc(user.uid).set({
-            'email': email,
-            'name': name,
-            'mobile': mobile,
-            'createdAt': Timestamp.now(),
-          });
-
-          log(email);
-          log(name);
-          log(mobile);
-        }
+        // User? user = _auth.currentUser;
+        // if(user != null){
+        //   await _firestore.collection('User').doc(user.uid).set({
+        //     'email': email,
+        //     'name': name,
+        //     'mobile': mobile,
+        //     'createdAt': Timestamp.now(),
+        //   }
+        //
+        //   );
+        //
+        //   log(email);
+        //   log(name);
+        //   log(mobile);
+        // }
         Get.snackbar(
           'Sign Up',
           'Sign Up Successfully',

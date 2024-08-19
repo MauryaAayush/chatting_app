@@ -20,7 +20,6 @@ class FirebaseAuthServices {
           'name': name,
           'mobile': mobile,
           'createdAt': Timestamp.now(),
-          // Add any additional fields you want to store
         });
         print("User created and data added to Firestore: ${user.email}");
       }
