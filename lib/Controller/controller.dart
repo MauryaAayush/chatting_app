@@ -21,9 +21,6 @@ class AuthController extends GetxController {
   RxString url = ''.obs;
   RxString mobile = ''.obs;
 
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   @override
   void onInit() {
     super.onInit();
@@ -45,8 +42,6 @@ class AuthController extends GetxController {
       log(mobile.value);
     }
   }
-
-  // kaha problem hoga sir bas tum dekho
 
 
   Future<void> signUp(
