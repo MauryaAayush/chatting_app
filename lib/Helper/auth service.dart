@@ -9,6 +9,9 @@ class FirebaseAuthServices {
 
   Future<void> createAccountUsingEmail(
       String email, String password, String name, String mobile) async {
+
+    print('-------------------create function called--------------------------');
+
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -16,7 +19,7 @@ class FirebaseAuthServices {
       User? user = userCredential.user;
       if (user != null) {
         // Add user data to Firestore
-        await firestore.collection('users').doc(user.uid).set({
+        await firestore.collection('users').doc(user.email).set({
           'email': email,
           'name': name,
           'mobile': mobile,
