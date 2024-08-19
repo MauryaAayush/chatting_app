@@ -7,7 +7,7 @@ import 'Controller/theme_controller.dart';
 import 'Views/Login_screen.dart';
 import 'Views/home_screen.dart';
 import 'Views/setting_screen.dart';
-import 'Views/sigin_screen.dart';
+import 'Views/signUp_screen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
