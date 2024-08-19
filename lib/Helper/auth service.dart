@@ -34,7 +34,7 @@ class FirebaseAuthServices {
           'createdAt': Timestamp.now(),
         });
 
-        print("User created and data added to Firestore: ${user.email}");
+        print("User created and data added to Firestore: ${user.uid}");
       }
     } catch (e) {
      log("ERROR : $e");
