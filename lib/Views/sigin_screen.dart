@@ -73,6 +73,7 @@ class SignUpPage extends StatelessWidget {
                     controller: controller.txtemail,
                     label: 'Email',
                     prefixIcon: Icons.email,
+
                   ),
                   Obx(
                     () => CustomTextField(
@@ -139,10 +140,12 @@ class SignUpPage extends StatelessWidget {
                     onPressed: () {
                       if (signUpController.agreeToTerms.value) {
                         controller.signUp(
+                          controller.txtname.text,
+                          controller.txtmobile.text,
                           controller.txtemail.text,
                           controller.txtpass.text,
-                          controller.txtmobile.text,
-                          controller.txtname.text,
+
+
                         );
                       } else {
                         Get.snackbar(

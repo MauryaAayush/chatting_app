@@ -67,7 +67,7 @@ class CustomDrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   leading: Icon(Icons.call, size: 24.r,color: Theme.of(context).colorScheme.primary,), // Responsive icon size
-                  title: Obx(() => Text(authController.phone.value,)), // Responsive font size
+                  title: Obx(() => Text(authController.mobile.value,)), // Responsive font size
                   // subtitle:
                 ),
 

@@ -4,6 +4,7 @@ import 'package:chatting_app/Helper/auth%20service.dart';
 import 'package:chatting_app/Helper/google_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,10 @@ class AuthController extends GetxController {
   RxString email = ''.obs;
   RxString name = ''.obs;
   RxString url = ''.obs;
-  RxString phone = ''.obs;
+  RxString mobile = ''.obs;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void onInit() {
@@ -33,20 +37,19 @@ class AuthController extends GetxController {
       url.value = user.photoURL ??
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqTrWRudq0k-8_zKLq7vjnXPvdSkznOmyjQ&s";
       name.value = user.displayName ?? "user name";
-      phone.value = user.phoneNumber ?? "no number";
+      mobile.value = user.phoneNumber ?? "no number";
       log('-----------------------------------');
       log(email.value);
       log(url.value);
       log(name.value);
-      log(phone.value);
+      log(mobile.value);
     }
   }
 
   Future<void> signUp(
-      String fullName, String mobileNumber, String email, String pass) async {
+      String email, String pass, String name, String mobile) async {
     try {
-      bool emailExists =
-          await FirebaseAuthServices.authServices.checkEmailExists(email);
+      bool emailExists = await FirebaseAuthServices.authServices.checkEmailExists(email);
       if (emailExists) {
         Get.snackbar(
           'Sign Up Failed',
@@ -56,24 +59,21 @@ class AuthController extends GetxController {
           colorText: Colors.white,
         );
       } else {
-        // Create user in Firebase Authentication
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: pass,
-        );
+        await FirebaseAuthServices.authServices.createAccountUsingEmail(email, pass,name,mobile);
 
-        // If successful, store user data in Firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .set({
-          'fullName': fullName,
-          'mobileNumber': mobileNumber,
-          'email': email,
-          'createdAt': DateTime.now(),
-        });
+        User? user = _auth.currentUser;
+        if(user != null){
+          await _firestore.collection('User').doc(user.uid).set({
+            'email': email,
+            'name': name,
+            'mobile': mobile,
+            'createdAt': Timestamp.now(),
+          });
 
+          log(email);
+          log(name);
+          log(mobile);
+        }
         Get.snackbar(
           'Sign Up',
           'Sign Up Successfully',
@@ -82,6 +82,7 @@ class AuthController extends GetxController {
           colorText: Colors.white,
         );
         Get.offNamed('/login');
+        // Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (e) {
       Get.snackbar(
@@ -92,6 +93,8 @@ class AuthController extends GetxController {
         colorText: Colors.white,
       );
     }
+
+
   }
 
   Future<void> signIn(String email, String pass) async {
@@ -99,6 +102,7 @@ class AuthController extends GetxController {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
         Get.offNamed('/home');
+        // Navigator.pushReplacementNamed(context,);
       } else {
         Get.snackbar(
           'Login Failed',
