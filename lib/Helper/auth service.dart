@@ -33,7 +33,7 @@ class FirebaseAuthServices {
           'mobile': mobile,
           'createdAt': Timestamp.now(),
         });
-        // ye call hi nhi ho raha
+
         print("User created and data added to Firestore: ${user.email}");
       }
     } catch (e) {
