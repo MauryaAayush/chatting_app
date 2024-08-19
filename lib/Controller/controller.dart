@@ -72,7 +72,6 @@ class AuthController extends GetxController {
           },
         );
 
-        // Navigator.of(context).pushReplacementNamed('/login');
       }
     } catch (e) {
       Get.snackbar(
