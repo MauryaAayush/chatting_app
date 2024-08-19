@@ -21,7 +21,6 @@ class FirebaseAuthServices {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      // ye call hi nhi ho raha
 
       print('------------------ Credential done---------------------------------');
 
