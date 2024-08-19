@@ -15,7 +15,6 @@ class LoginController extends GetxController {
   final txtpass = TextEditingController();
   var isPasswordVisible = false.obs;
 
-  // Add any other login-related methods or variables here, such as validation or API calls.
 
   @override
   void dispose() {
