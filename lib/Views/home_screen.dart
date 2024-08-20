@@ -79,7 +79,8 @@ class HomeScreen extends StatelessWidget {
         // textnum: userData['mobile'],
         text: userData["email"],
         onTap: () {
-          //   tapped on a user -> to go to chat
+
+          Get.toNamed('/chat');
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(
