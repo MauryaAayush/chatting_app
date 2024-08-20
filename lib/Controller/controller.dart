@@ -1,21 +1,20 @@
 import 'dart:developer';
 
-import 'package:chatting_app/Helper/auth%20service.dart';
 import 'package:chatting_app/Helper/google_services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import '../Views/home_screen.dart';
+import '../Helper/auth service.dart';
 
 class AuthController extends GetxController {
+  // Controllers for text fields
   TextEditingController txtemail = TextEditingController();
   TextEditingController txtpass = TextEditingController();
   TextEditingController txtname = TextEditingController();
   TextEditingController txtmobile = TextEditingController();
 
+  // Observables for user details
   RxString email = ''.obs;
   RxString name = ''.obs;
   RxString url = ''.obs;
@@ -27,91 +26,98 @@ class AuthController extends GetxController {
     getUserDetails();
   }
 
+  /// Fetches the user's details and updates the observables.
   void getUserDetails() {
     User? user = GoogleLoginServices.googleLoginServices.currentUser();
     if (user != null) {
-      email.value = user.email!;
-      url.value = user.photoURL ??
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbqTrWRudq0k-8_zKLq7vjnXPvdSkznOmyjQ&s";
-      name.value = user.displayName ?? "user name";
-      mobile.value = user.phoneNumber ?? "no number";
-      log('-----------------------------------');
-      log(email.value);
-      log(url.value);
-      log(name.value);
-      log(mobile.value);
+      email.value = user.email ?? 'No email';
+      url.value = user.photoURL ?? "https://via.placeholder.com/150";
+      name.value = user.displayName ?? "User name";
+      mobile.value = user.phoneNumber ?? "No number";
+      logUserDetails();
     }
   }
 
+  /// Logs the current user details.
+  void logUserDetails() {
+    log('-----------------------------------');
+    log('Email: ${email.value}');
+    log('URL: ${url.value}');
+    log('Name: ${name.value}');
+    log('Mobile: ${mobile.value}');
+  }
+
+  /// Handles user sign-up.
   Future<void> signUp(
       String name, String mobile, String email, String password) async {
     try {
       bool emailExists =
-          await FirebaseAuthServices.authServices.checkEmailExists(email);
-      log("Email is Exists : $emailExists");
+      await FirebaseAuthServices.authServices.checkEmailExists(email);
+      log("Email Exists: $emailExists");
+
       if (emailExists) {
-        Get.snackbar(
+        showSnackbar(
           'Sign Up Failed',
           'Email already in use. Please use a different email.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+          Colors.red,
         );
       } else {
         await FirebaseAuthServices.authServices
             .createAccountUsingEmail(email, password, name, mobile)
             .then(
-          (value) {
-            Get.snackbar(
+              (value) {
+            showSnackbar(
               'Sign Up',
               'Sign Up Successfully',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green,
-              colorText: Colors.white,
+              Colors.green,
             );
             Get.offNamed('/login');
           },
         );
       }
     } catch (e) {
-      Get.snackbar(
-        'Sign Up Failed',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      handleAuthError(e, 'Sign Up Failed');
     }
   }
 
+  /// Handles user sign-in.
   Future<void> signIn(String email, String pass) async {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
         Get.offNamed('/home');
-        // Navigator.pushReplacementNamed(context,);
       } else {
-        Get.snackbar(
+        showSnackbar(
           'Login Failed',
           'Incorrect email or password.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+          Colors.red,
         );
       }
     } catch (e) {
-      Get.snackbar(
-        'Login Failed',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      handleAuthError(e, 'Login Failed');
     }
   }
 
+  /// Handles user logout.
   void logOut() {
     FirebaseAuthServices.authServices.sign_Out();
     GoogleLoginServices.googleLoginServices.logOut();
+  }
+
+  /// Shows a custom Snackbar with the provided message and color.
+  void showSnackbar(String title, String message, Color backgroundColor) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: backgroundColor,
+      colorText: Colors.white,
+    );
+  }
+
+  /// Handles and logs authentication errors.
+  void handleAuthError(dynamic e, String title) {
+    log(e.toString());
+    showSnackbar(title, e.toString(), Colors.red);
   }
 }

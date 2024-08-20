@@ -14,6 +14,7 @@ import 'home_screen.dart';
 class LoginScreen extends StatelessWidget {
   final loginController = Get.put(LoginController());
   final authController = Get.put(AuthController());
+  final signUpController = Get.put(SignUpController());
 
   LoginScreen({super.key});
 
@@ -71,9 +72,20 @@ class LoginScreen extends StatelessWidget {
                         () => CustomTextField(
                       label: 'Password',
                       prefixIcon: Icons.lock,
-                      obscureText: loginController.isPasswordVisible.value,
+                      obscureText: !signUpController.isPasswordVisible.value,
                       controller: loginController.txtpass,
-
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              signUpController.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: const Color(0xFF40744D),
+                            ),
+                            onPressed: () {
+                              signUpController.isPasswordVisible.value =
+                              !signUpController.isPasswordVisible.value;
+                            },
+                          ),
                     ),
                   ),
                   SizedBox(height: 28.h),

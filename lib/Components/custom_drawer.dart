@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../Controller/controller.dart';
+import '../Views/Login_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -92,6 +94,20 @@ class CustomDrawer extends StatelessWidget {
               title: const Text('L O G O U T'),
               leading: Icon(Icons.logout,
                 color: Theme.of(context).colorScheme.primary,),
+              onTap: () {
+                authController.logOut();
+                Fluttertoast.showToast(
+                  msg: "Logged out successfully",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  fontSize: 16.sp, // Responsive font size
+                );
+                Get.off(() => LoginScreen());
+              },
+
               // onTap: logout,
             ),
           )

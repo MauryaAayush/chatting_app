@@ -19,7 +19,8 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrawer(authController: authController),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Home Screen', style: TextStyle(fontSize: 20.sp)), // Responsive font size
+        title: Text('Home Screen', style: TextStyle(fontSize: 20.sp)),
+        // Responsive font size
         actions: [
           IconButton(
             onPressed: () {
@@ -40,10 +41,11 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text('Home Screen', style: TextStyle(fontSize: 16.sp)), // Responsive font size
+        child: Text(
+          'Home Screen',
+          style: TextStyle(fontSize: 16.sp),
+        ), // Responsive font size
       ),
     );
   }
 }
-
-
