@@ -50,7 +50,7 @@ class AuthController extends GetxController {
 
   /// Handles user sign-up.
   Future<void> signUp(
-      String name, String mobile, String email, String password) async {
+      String name, String mobile, String email, String password,String url) async {
     try {
       bool emailExists =
       await FirebaseAuthServices.authServices.checkEmailExists(email);
@@ -64,7 +64,7 @@ class AuthController extends GetxController {
         );
       } else {
         await FirebaseAuthServices.authServices
-            .createAccountUsingEmail(email, password, name, mobile)
+            .createAccountUsingEmail(email, password, name, mobile,url)
             .then(
               (value) {
             showSnackbar(
@@ -103,9 +103,6 @@ class AuthController extends GetxController {
         print(userDetail['name']+"---------------------");
         print(userDetail['email']);
         print(userDetail['mobile']);
-
-
-
 
 
         Get.offNamed('/home');

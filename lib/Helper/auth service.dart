@@ -16,7 +16,7 @@ class FirebaseAuthServices {
 
 
   Future<void> createAccountUsingEmail(
-      String email, String password, String name, String mobile) async {
+      String email, String password, String name, String mobile,String image) async {
 
     print('-------------------create function called--------------------------');
 
@@ -37,10 +37,10 @@ class FirebaseAuthServices {
           'email': email,
           'name': name,
           'mobile': mobile,
-          'createdAt': Timestamp.now(),
+          'image': image,
         });
 
-        print("User created and data added to Firestore: ${user.uid}");
+        print("User created and data added to Firestore: ${user.email}");
       }
     } catch (e) {
      log("ERROR : $e");
