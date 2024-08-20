@@ -43,11 +43,11 @@ class AuthController extends GetxController {
     }
   }
 
-
   Future<void> signUp(
       String name, String mobile, String email, String password) async {
     try {
-      bool emailExists = await FirebaseAuthServices.authServices.checkEmailExists(email);
+      bool emailExists =
+          await FirebaseAuthServices.authServices.checkEmailExists(email);
       log("Email is Exists : $emailExists");
       if (emailExists) {
         Get.snackbar(
@@ -57,9 +57,10 @@ class AuthController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-
       } else {
-        await FirebaseAuthServices.authServices.createAccountUsingEmail(email, password,name,mobile).then(
+        await FirebaseAuthServices.authServices
+            .createAccountUsingEmail(email, password, name, mobile)
+            .then(
           (value) {
             Get.snackbar(
               'Sign Up',
@@ -71,7 +72,6 @@ class AuthController extends GetxController {
             Get.offNamed('/login');
           },
         );
-
       }
     } catch (e) {
       Get.snackbar(
@@ -82,8 +82,6 @@ class AuthController extends GetxController {
         colorText: Colors.white,
       );
     }
-
-
   }
 
   Future<void> signIn(String email, String pass) async {
