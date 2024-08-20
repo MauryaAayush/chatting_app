@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:chatting_app/Helper/google_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -80,11 +81,33 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<Map> getUser(String email)
+  async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+   DocumentSnapshot data = await firestore.collection('users').doc(email).get();
+
+   return data.data() as Map<String,dynamic>;
+  }
+
+  RxMap userDetail = {}.obs;
+
   /// Handles user sign-in.
   Future<void> signIn(String email, String pass) async {
     try {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
+        userDetail.value = await getUser(email);
+
+        print("printing get user method outcome");
+        print(userDetail['name']+"---------------------");
+        print(userDetail['email']);
+        print(userDetail['mobile']);
+
+
+
+
+
         Get.offNamed('/home');
       } else {
         showSnackbar(

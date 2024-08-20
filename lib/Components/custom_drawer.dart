@@ -54,6 +54,9 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               //   home list tile
+              // Divider(
+              //   height: 1,
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
@@ -72,7 +75,6 @@ class CustomDrawer extends StatelessWidget {
                   title: Obx(() => Text(authController.mobile.value,)), // Responsive font size
                   // subtitle:
                 ),
-
               ),
 
               Padding(

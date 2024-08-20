@@ -40,7 +40,6 @@ class ChatService {
 
 // send message
 
-
 // get message
 
 }
