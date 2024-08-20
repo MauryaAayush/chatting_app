@@ -33,7 +33,7 @@ class GoogleLoginServices {
         await firestore.collection('users').doc(user.uid).set({
           'name': user.displayName,
           'email': user.email,
-          'phoneNumber': user.phoneNumber,
+          'mobile': user.phoneNumber,
           'photoURL': user.photoURL,
         });
       }
