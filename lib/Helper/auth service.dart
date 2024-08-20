@@ -10,6 +10,11 @@ class FirebaseAuthServices {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  User? getCurrentUser(){
+    return auth.currentUser;
+  }
+
+
   Future<void> createAccountUsingEmail(
       String email, String password, String name, String mobile) async {
 

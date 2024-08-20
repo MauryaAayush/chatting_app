@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                       if (FirebaseAuth.instance.currentUser != null) {
                         print('User signed in: ${FirebaseAuth.instance.currentUser!.email}');
                         Get.off(
-                          const HomeScreen(),
+                           HomeScreen(),
                           transition: Transition.downToUp,
                           duration: const Duration(milliseconds: 500),
                         );
