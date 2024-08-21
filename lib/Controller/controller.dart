@@ -82,14 +82,23 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<Map> getUser(String email)
-  async {
+  Future<Map<String, dynamic>> getUser(String email) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+    try {
+      DocumentSnapshot data = await firestore.collection('users').doc(email).get();
 
-   DocumentSnapshot data = await firestore.collection('users').doc(email).get();
-
-   return data.data() as Map<String,dynamic>;
+      if (data.exists) {
+        return data.data() as Map<String, dynamic>;
+      } else {
+        log('Document does not exist');
+        return {};
+      }
+    } catch (e) {
+      log('Error fetching user data: $e');
+      return {};
+    }
   }
+
 
   RxMap userDetail = {}.obs;
 
@@ -99,7 +108,7 @@ class AuthController extends GetxController {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
         userDetail.value = await getUser(email);
-userDetail.refresh();
+
         print("printing get user method outcome");
         print(userDetail['name']+"---------------------");
         print(userDetail['email']+"--------------------");

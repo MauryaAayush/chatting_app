@@ -18,17 +18,17 @@ class FirebaseAuthServices {
   Future<void> createAccountUsingEmail(
       String email, String password, String name, String mobile,String image) async {
 
-    print('-------------------create function called--------------------------');
+    print('------------------- Create function called--------------------------');
 
 
     try {
-      print('------------------ Starting---------------------------------');
+      print('------------------ Starting ---------------------------------');
       log("Sign Up Email : $email\n Password : $password");
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
 
-      print('------------------ Credential done---------------------------------');
+      print('------------------ Credential done ---------------------------------');
 
       User? user = userCredential.user;
       if (user != null) {

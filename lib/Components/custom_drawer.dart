@@ -26,36 +26,64 @@ class CustomDrawer extends StatelessWidget {
         children: [
           Column(
             children: [
-              //   logo
 
-              DrawerHeader(
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 28.r, // Responsive radius
-                      backgroundImage: NetworkImage(authController.url.value),
-                    ),
-                    SizedBox(height: 16.h), // Responsive height
-                    Obx(() => Text(
-                        authController.userDetail['name'],
-                        style: TextStyle(
-                          fontSize: 20.sp, // Responsive font size
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      authController.email.value,
-                      style: TextStyle(
-                        fontSize: 15.sp, // Responsive font size
-                        color: Colors.grey,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+        FutureBuilder<Map<String, dynamic>>(
+    future: authController.getUser(authController.email.value),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const DrawerHeader(
+          child: Center(child: CircularProgressIndicator()),
+        );
+      } else if (snapshot.hasError) {
+        return const DrawerHeader(
+          child: Center(child: Text('Error loading user data')),
+        );
+      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const DrawerHeader(
+          child: Center(child: Text('No user data found')),
+        );
+      }
+
+
+      // Extract user data
+      final userData = snapshot.data!;
+      final userName = userData['name'] ?? 'User name';
+      final userEmail = userData['email'] ?? 'No email';
+      final userPhoto = userData['photoURL'] ??
+          'https://via.placeholder.com/150';
+      final userMobile = userData['mobile'] ?? 'No number';
+
+      //   logo
+
+      return DrawerHeader(
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 28.r, // Responsive radius
+              backgroundImage: NetworkImage(userPhoto),
+            ),
+            SizedBox(height: 16.h), // Responsive height
+            Text( userName,
+              // authController.userDetail['name'].toString(),
+              style: TextStyle(
+                fontSize: 20.sp, // Responsive font size
+                fontWeight: FontWeight.bold,
               ),
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text( userEmail,
+              // authController.email.value,
+              style: TextStyle(
+                fontSize: 15.sp, // Responsive font size
+                color: Colors.grey,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      );
+    },
+        ),
               //   home list tile
               // Divider(
               //   height: 1,
