@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ChatService {
+import '../Model/msg_model.dart';
 
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final FirebaseAuth auth = FirebaseAuth.instance;
+class ChatService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
 // get user stream
 
@@ -23,10 +24,10 @@ class ChatService {
  */
 
   Stream<List<Map<String, dynamic>>> getUserStream() {
-    return firestore.collection("users").snapshots().map(
-          (snapshot) {
+    return _firestore.collection("users").snapshots().map(
+      (snapshot) {
         return snapshot.docs.map(
-              (doc) {
+          (doc) {
             //  go through each individual user
             final user = doc.data();
 
@@ -40,6 +41,49 @@ class ChatService {
 
 // send message
 
+  // lets go
+  Future<void> sendMessage(String receiverID, message) async {
+    //   for the current user info
+    final String currentUserId = _auth.currentUser!.uid;
+    final String currentUserEmail = _auth.currentUser!.email!;
+    final Timestamp timestamp = Timestamp.now();
+
+    // lets create a message
+
+    Message newMessage = Message(
+        senderID: currentUserId,
+        senderEmail: currentUserEmail,
+        receiverID: receiverID,
+        message: message,
+        timestamp: timestamp);
+
+    //  lets create a chat room ID  for the two user
+    List<String> ids = [currentUserId, receiverID];
+
+    ids.sort();
+    String chatRoomID = ids.join('_');
+
+    // add new msg to database Or start chatting
+    await _firestore
+        .collection("rooms")
+        .doc(chatRoomID)
+        .collection('message')
+        .add(newMessage.toMap());
+  }
+
 // get message
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessage(
+      String userID, otherUserID) {
+    List<String> ids = [userID, otherUserID];
+    ids.sort();
+    String chatRoomID = ids.join('_');
+
+    return _firestore
+        .collection("rooms")
+        .doc(chatRoomID)
+        .collection("message")
+        .orderBy("timestamp", descending: false)
+        .snapshots();
+  }
 }

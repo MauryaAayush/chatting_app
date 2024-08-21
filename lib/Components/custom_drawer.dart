@@ -16,6 +16,9 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
@@ -24,33 +27,33 @@ class CustomDrawer extends StatelessWidget {
           Column(
             children: [
               //   logo
+
               DrawerHeader(
-                child: Obx(
-                      () => Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 28.r, // Responsive radius
-                        backgroundImage: NetworkImage(authController.url.value),
-                      ),
-                      SizedBox(height: 16.h), // Responsive height
-                      Text(
-                        authController.name.value,
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 28.r, // Responsive radius
+                      backgroundImage: NetworkImage(authController.url.value),
+                    ),
+                    SizedBox(height: 16.h), // Responsive height
+                    Obx(() => Text(
+                        authController.userDetail['name'],
                         style: TextStyle(
                           fontSize: 20.sp, // Responsive font size
                           fontWeight: FontWeight.bold,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        authController.email.value,
-                        style: TextStyle(
-                          fontSize: 15.sp, // Responsive font size
-                          color: Colors.grey,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      authController.email.value,
+                      style: TextStyle(
+                        fontSize: 15.sp, // Responsive font size
+                        color: Colors.grey,
                       ),
-                    ],
-                  ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
               //   home list tile

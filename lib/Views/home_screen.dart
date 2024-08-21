@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
     AuthController authController = Get.put(AuthController());
 
     return Scaffold(
-      drawer: CustomDrawer(authController: authController),
+      drawer: CustomDrawer(authController: authController,),
       appBar: AppBar(
         centerTitle: true,
         title: Text('Home Screen', style: TextStyle(fontSize: 20.sp)),

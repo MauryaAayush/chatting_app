@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../Helper/auth service.dart';
 
 class AuthController extends GetxController {
+
   // Controllers for text fields
   TextEditingController txtemail = TextEditingController();
   TextEditingController txtpass = TextEditingController();
@@ -98,11 +99,11 @@ class AuthController extends GetxController {
       User? user = await FirebaseAuthServices.authServices.signIn(email, pass);
       if (user != null) {
         userDetail.value = await getUser(email);
-
+userDetail.refresh();
         print("printing get user method outcome");
         print(userDetail['name']+"---------------------");
-        print(userDetail['email']);
-        print(userDetail['mobile']);
+        print(userDetail['email']+"--------------------");
+        print(userDetail['mobile']+"-------------------");
 
 
         Get.offNamed('/home');
