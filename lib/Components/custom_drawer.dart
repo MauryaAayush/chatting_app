@@ -49,7 +49,7 @@ class CustomDrawer extends StatelessWidget {
       final userData = snapshot.data!;
       final userName = userData['name'] ?? 'User name';
       final userEmail = userData['email'] ?? 'No email';
-      final userPhoto = userData['photoURL'] ??
+      final userPhoto = userData['image'] ??
           'https://via.placeholder.com/150';
       final userMobile = userData['mobile'] ?? 'No number';
 

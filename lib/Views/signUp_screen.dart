@@ -144,7 +144,7 @@ class SignUpPage extends StatelessWidget {
                           controller.txtmobile.text,
                           controller.txtemail.text,
                           controller.txtpass.text,
-                            "https://via.placeholder.com/150"
+                            "https://cdn.pixabay.com/photo/2013/07/12/14/36/man-148582_1280.png"
                         );
                       } else {
                         Get.snackbar(

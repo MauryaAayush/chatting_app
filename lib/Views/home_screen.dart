@@ -77,8 +77,8 @@ class HomeScreen extends StatelessWidget {
     if (userData['email'] != _authService.getCurrentUser()?.email) {
       return UserTile(
         text: userData["name"] ?? 'No Name',
-        subtitle: userData["email"] ?? 'No Email',  // Assuming UserTile has a subtitle parameter
-        imageUrl: userData["photoURL"] ?? 'https://via.placeholder.com/150',  // Assuming UserTile has an imageUrl parameter
+        subtitle: userData["mobile"] ?? '86049492**',  // Assuming UserTile has a subtitle parameter
+        imageUrl: userData["image"] ?? 'https://via.placeholder.com/150',  // Assuming UserTile has an imageUrl parameter
         onTap: () {
           Get.toNamed('/chat');
           // Alternatively, you can use the commented-out Navigator.push logic if needed
