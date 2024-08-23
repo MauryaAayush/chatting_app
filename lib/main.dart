@@ -1,5 +1,4 @@
 import 'package:chatting_app/Helper/auth_gate.dart';
-import 'package:chatting_app/Views/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
