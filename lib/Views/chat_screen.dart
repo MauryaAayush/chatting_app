@@ -1,8 +1,10 @@
+import 'package:chatting_app/Components/chat_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../Components/custom_textfield.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
 
@@ -42,16 +44,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Text('Loading.....',style: TextStyle(
-                fontSize: 20.sp
-              ),),
+              child: Text(
+                'Loading.....',
+                style: TextStyle(fontSize: 20.sp),
+              ),
             );
           }
 
           return ListView(
-            // children: snapshot.data!.docs
-            //     .map((doc) => _buildMessageItem(doc))
-            //     .toList(),
+            children: snapshot.data!.docs
+                .map((doc) => _buildMessageItem(doc))
+                .toList(),
           );
         },
       );
@@ -62,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text(name),
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
         centerTitle: true,
       ),
       body: Column(
@@ -74,18 +77,69 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
 
           //   user input
-          // _buildUserInput(),
+          _buildUserInput(),
         ],
       ),
     );
   }
 
-  // Widget _buildMessageItem(DocumentSnapshot doc){
-  //
-  // }
-  //
-  // Widget _buildUserInput(){
-  //
-  // }
+  Widget _buildMessageItem(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
+    bool isCurrentUser =
+        data['senderEmail'] != _authService.getCurrentUser()!.uid;
+
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+
+    return Container(
+      alignment: alignment,
+      child: Column(
+        crossAxisAlignment:
+            isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+
+        children: [
+          ChatContainer(message: data["message"], isCurrentUser: isCurrentUser)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUserInput() {
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        children: [
+          //  textfield should take up most of the space
+          Expanded(
+            child: CustomTextField(
+              label: ,
+              prefixIcon: ,
+              suffixIcon: ,
+              hintText: "Type a message",
+              obscureText: false,
+              controller: _messageController,
+              // focusNode: myFocusNode,
+            ),
+          ),
+
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+            margin: const EdgeInsets.only(right: 25),
+            child: IconButton(
+              onPressed: sendMessage,
+              icon: const Icon(
+                Icons.arrow_upward,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

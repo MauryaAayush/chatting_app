@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.prefixIcon,
     this.obscureText = false,
-    this.suffixIcon,
+    this.suffixIcon, required String hintText,
   });
 
   @override
