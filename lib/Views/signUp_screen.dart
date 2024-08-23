@@ -62,17 +62,17 @@ class SignUpPage extends StatelessWidget {
                    CustomTextField(
                     label: 'Full Name',
                     prefixIcon: Icons.person,
-                    controller: controller.txtname,
+                    controller: controller.txtname, hintText: 'Enter your name',
                   ),
                   CustomTextField(
                     controller: controller.txtmobile,
                     label: 'Phone',
-                    prefixIcon: Icons.phone,
+                    prefixIcon: Icons.phone, hintText: 'Enter your Mobile Number',
                   ),
                   CustomTextField(
                     controller: controller.txtemail,
                     label: 'Email',
-                    prefixIcon: Icons.email,
+                    prefixIcon: Icons.email, hintText: 'Enter your email',
 
                   ),
                   Obx(
@@ -92,7 +92,7 @@ class SignUpPage extends StatelessWidget {
                           signUpController.isPasswordVisible.value =
                               !signUpController.isPasswordVisible.value;
                         },
-                      ),
+                      ), hintText: 'Enter your password',
                     ),
                   ),
                   Obx(
@@ -112,7 +112,7 @@ class SignUpPage extends StatelessWidget {
                           signUpController.isConfirmPasswordVisible.value =
                               !signUpController.isConfirmPasswordVisible.value;
                         },
-                      ),
+                      ), hintText: 'Re-Write password',
                     ),
                   ),
                   Row(

@@ -84,18 +84,19 @@ class HomeScreen extends StatelessWidget {
         imageUrl: userData["image"] ?? 'https://via.placeholder.com/150',
         // Assuming UserTile has an imageUrl parameter
         onTap: () {
-          // Navigator.of(context).push(MaterialPageRoute(
-          //   builder: (context) => ChatScreen(
-          //
-          //       receiverEmail: receiverEmail, receiverID: receiverID),
-          // ));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ChatScreen(
+                receiverEmail: userData['email'],
+                name: userData['name'],
+            ),
+          ));
 
-          Get.toNamed('/chat', arguments: {
-            'name': userData['name'],
-            'email': userData['email'],
-            'receiverID' : userData['uid']
-          });
-          // Alternatively, you can use the commented-out Navigator.push logic if needed
+          // Get.toNamed('/chat', arguments: {
+          //   'name': userData['name'],
+          //   'email': userData['email'],
+          //   'receiverID' : userData['uid']
+          // });
+          // // Alternatively, you can use the commented-out Navigator.push logic if needed
         },
       );
     } else {

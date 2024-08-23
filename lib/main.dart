@@ -65,12 +65,12 @@ class MyApp extends StatelessWidget {
             transition: Transition.fadeIn,
             transitionDuration: const Duration(milliseconds: 500),
           ),
-          GetPage(
-            name: '/chat',
-            page: () =>  const ChatScreen(),
-            transition: Transition.rightToLeft,
-            transitionDuration: const Duration(milliseconds: 500),
-          ),
+          // GetPage(
+          //   name: '/chat',
+          //   page: () =>  const ChatScreen(),
+          //   transition: Transition.rightToLeft,
+          //   transitionDuration: const Duration(milliseconds: 500),
+          // ),
         ],
       )),
     );

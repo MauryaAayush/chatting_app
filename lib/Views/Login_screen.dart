@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                   CustomTextField(
                     controller: loginController.txtemail,
                     label: 'Email',
-                    prefixIcon: Icons.email,
+                    prefixIcon: Icons.email, hintText: 'Email',
                   ),
                   SizedBox(height: 20.h),
                   Obx(
@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                               signUpController.isPasswordVisible.value =
                               !signUpController.isPasswordVisible.value;
                             },
-                          ),
+                          ), hintText: 'Password',
                     ),
                   ),
                   SizedBox(height: 28.h),
