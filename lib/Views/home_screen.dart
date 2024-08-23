@@ -1,10 +1,11 @@
+import 'package:chatting_app/Views/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Components/custom_drawer.dart';
-import '../Components/user_title.dart';  // Assuming this is a custom widget to display user details
+import '../Components/user_title.dart'; // Assuming this is a custom widget to display user details
 import '../Controller/controller.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
@@ -72,15 +73,28 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Build individual list tile for the user
-  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
+  Widget _buildUserListItem(
+      Map<String, dynamic> userData, BuildContext context) {
     // Display all users except the current user
     if (userData['email'] != _authService.getCurrentUser()?.email) {
       return UserTile(
         text: userData["name"] ?? 'No Name',
-        subtitle: userData["mobile"] ?? '86049492**',  // Assuming UserTile has a subtitle parameter
-        imageUrl: userData["image"] ?? 'https://via.placeholder.com/150',  // Assuming UserTile has an imageUrl parameter
+        subtitle: userData["mobile"] ?? '86049492**',
+        // Assuming UserTile has a subtitle parameter
+        imageUrl: userData["image"] ?? 'https://via.placeholder.com/150',
+        // Assuming UserTile has an imageUrl parameter
         onTap: () {
-          Get.toNamed('/chat');
+          // Navigator.of(context).push(MaterialPageRoute(
+          //   builder: (context) => ChatScreen(
+          //
+          //       receiverEmail: receiverEmail, receiverID: receiverID),
+          // ));
+
+          Get.toNamed('/chat', arguments: {
+            'name': userData['name'],
+            'email': userData['email'],
+            'receiverID' : userData['uid']
+          });
           // Alternatively, you can use the commented-out Navigator.push logic if needed
         },
       );

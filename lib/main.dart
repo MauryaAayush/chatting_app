@@ -67,8 +67,8 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
             name: '/chat',
-            page: () => const ChatScreen(),
-            transition: Transition.fadeIn,
+            page: () =>  const ChatScreen(),
+            transition: Transition.rightToLeft,
             transitionDuration: const Duration(milliseconds: 500),
           ),
         ],

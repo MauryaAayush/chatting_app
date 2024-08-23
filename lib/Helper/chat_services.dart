@@ -39,6 +39,9 @@ class ChatService {
     );
   }
 
+
+  // we are going to create multiple chat rooms, for different user
+
 // send message
 
   // lets go
