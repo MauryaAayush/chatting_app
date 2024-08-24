@@ -103,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     bool isCurrentUser = senderId == currentUserEmail;
 
-    print(isCurrentUser);
+    // print(isCurrentUser);
     var alignment =
         isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
 
