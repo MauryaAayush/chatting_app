@@ -33,14 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve the arguments passed from HomeScreen
-    // final arguments = Get.arguments as Map<String, dynamic>;
-    // final String name = arguments['name'] ?? 'No Name';
-    // final String email = arguments['email'] ?? 'No Email';
-    // final String receiverID = arguments['uid'] ?? 'No UID';
-
-
-
 
     Widget buildMessageList() {
       String senderID = _authService.getCurrentUser()!.email!;

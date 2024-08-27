@@ -9,20 +9,6 @@ class ChatService {
 
 // get user stream
 
-/*
-  List<Map<String,dynamic>> =
-  [
-  {
-  'email : admin@gmail.com',
-  'id' : ....
-  },
-   {
-  'email : aayush@gmail.com',
-  'id' : ....
-  },
-  ]
- */
-
   Stream<List<Map<String, dynamic>>> getUserStream() {
     return _firestore.collection("users").snapshots().map(
       (snapshot) {
