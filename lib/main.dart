@@ -75,6 +75,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-// https://cdn.pixabay.com/photo/2013/07/12/14/36/man-148582_1280.png
