@@ -22,7 +22,7 @@ class NotificationServices {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
     AndroidNotificationDetails(
       'your_channel_id',
-      'your_channel_name',
+      'Message',
       channelDescription: 'your_channel_description',
       importance: Importance.max,
       priority: Priority.high,
