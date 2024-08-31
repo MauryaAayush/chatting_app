@@ -26,6 +26,7 @@ class NotificationServices {
       channelDescription: 'your_channel_description',
       importance: Importance.max,
       priority: Priority.high,
+      showWhen: false,
       ticker: 'ticker',
     );
 

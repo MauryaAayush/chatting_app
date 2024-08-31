@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Components/msg_textfield.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
-import '../Helper/notification_services.dart';
 
 class ChatScreen extends StatefulWidget {
   final String receiverEmail;
@@ -25,8 +24,6 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuthServices _authService = FirebaseAuthServices();
-  final NotificationServices _notificationServices = NotificationServices(); // Initialize NotificationServices
-  String _lastMessageId = ""; // Track the last message ID to detect new messages
 
   Future<void> sendMessage() async {
     if (_messageController.text.isNotEmpty) {
@@ -55,24 +52,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
         if (snapshot.hasData) {
           final List<DocumentSnapshot> docs = snapshot.data!.docs;
-
-          // Check if there is a new message
-          if (docs.isNotEmpty && docs.last.id != _lastMessageId) {
-            _lastMessageId = docs.last.id;
-
-            final Map<String, dynamic> data = docs.last.data() as Map<String, dynamic>;
-            final String message = data['message'];
-            final String senderEmail = data['senderID'];
-
-            // Show notification if the message is from the other user
-            if (senderEmail != senderID) {
-              _notificationServices.showNotification(
-                docs.last.hashCode, // Unique ID for the notification
-                widget.name, // Notification title (the name of the sender)
-                message, // Notification body (the message text)
-              );
-            }
-          }
 
           return ListView(
             children: docs.map((doc) => _buildMessageItem(doc)).toList(),
