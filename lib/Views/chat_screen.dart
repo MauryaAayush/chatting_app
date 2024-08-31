@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Components/msg_textfield.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
-import '../Helper/notification_services.dart'; // Import the notification services
+import '../Helper/notification_services.dart';
 
 class ChatScreen extends StatefulWidget {
   final String receiverEmail;
