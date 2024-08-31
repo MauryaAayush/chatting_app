@@ -12,10 +12,10 @@ class ChatScreen extends StatefulWidget {
   final String name;
 
   const ChatScreen({
-    Key? key,
+    super.key,
     required this.receiverEmail,
     required this.name,
-  }) : super(key: key);
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
