@@ -91,12 +91,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ));
 
-          // Get.toNamed('/chat', arguments: {
-          //   'name': userData['name'],
-          //   'email': userData['email'],
-          //   'receiverID' : userData['uid']
-          // });
-          // // Alternatively, you can use the commented-out Navigator.push logic if needed
         },
       );
     } else {
