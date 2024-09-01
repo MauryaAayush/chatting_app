@@ -1,15 +1,14 @@
-import 'package:chatting_app/Views/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Components/custom_drawer.dart';
-import '../Components/user_title.dart';
 import '../Controller/controller.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
 import '../Helper/notification_services.dart';
 import 'Login_screen.dart';
+import 'chat_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -20,6 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   final Map<String, String> _lastMessageIds = {};
 
+  // Track the last message ID for each user
   bool _isChatScreenActive = false;
 
   @override
@@ -27,26 +27,19 @@ class HomeScreen extends StatelessWidget {
     AuthController authController = Get.put(AuthController());
 
     return Scaffold(
+      // backgroundColor: Theme.of(context).colorScheme.surface,  // Dark background color
       drawer: CustomDrawer(authController: authController),
       appBar: AppBar(
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text(
-          'Home Screen',
+          'Chats',
           style: TextStyle(
-            fontSize: 22.sp,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
           ),
         ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blueAccent, Colors.lightBlue],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -62,11 +55,34 @@ class HomeScreen extends StatelessWidget {
               );
               Get.off(() => LoginScreen());
             },
-            icon: Icon(Icons.logout, size: 24.r, color: Colors.white),
+            icon: Icon(Icons.logout, size: 24.r),
           ),
         ],
       ),
-      body: _buildUserList(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search',
+                hintStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Color(0xFF2C2C2C),
+                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: _buildUserList(),
+          ),
+        ],
+      ),
+
     );
   }
 
@@ -75,13 +91,12 @@ class HomeScreen extends StatelessWidget {
       stream: _chatService.getUserStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(child: Text('Error', style: TextStyle(color: Colors.red)));
+          return const Text('Error');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Text('Loading...', style: TextStyle(color: Colors.white));
         }
         return ListView(
-          padding: EdgeInsets.all(8.0),
           children: snapshot.data!
               .map<Widget>((userData) => _buildUserListItem(userData, context))
               .toList(),
@@ -97,6 +112,7 @@ class HomeScreen extends StatelessWidget {
         var lastMessageData = snapshot.docs.last.data();
         String newMessageId = snapshot.docs.last.id;
 
+        // Track the last message ID for this particular receiver
         if (_lastMessageIds[receiverEmail] != newMessageId && !_isChatScreenActive) {
           String messageContent = lastMessageData['message'] ?? 'New message';
 
@@ -106,7 +122,7 @@ class HomeScreen extends StatelessWidget {
             messageContent,
           );
 
-          _lastMessageIds[receiverEmail] = newMessageId;
+          _lastMessageIds[receiverEmail] = newMessageId; // Update last message ID for this receiver
         }
       }
     });
@@ -116,40 +132,57 @@ class HomeScreen extends StatelessWidget {
     String currentUserEmail = _authService.getCurrentUser()!.email!;
 
     if (userData['email'] != currentUserEmail) {
-      return Padding(
-        padding: EdgeInsets.symmetric(vertical: 6.0),
-        child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-          elevation: 4.0,
-          child: ListTile(
-            contentPadding: EdgeInsets.all(8.0),
-            leading: CircleAvatar(
-              radius: 30.r,
-              backgroundImage: NetworkImage(userData["image"] ?? 'https://via.placeholder.com/150'),
-            ),
-            title: Text(
-              userData["name"] ?? 'No Name',
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(userData["mobile"] ?? '86049492**'),
-            trailing: Icon(Icons.chat, color: Colors.blueAccent, size: 24.r),
-            onTap: () {
-              _isChatScreenActive = true;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    receiverEmail: userData['email'],
-                    name: userData['name'],
-                  ),
-                ),
-              ).then((_) {
-                _isChatScreenActive = false;
-              });
-              _listenForNewMessages(userData['email'], userData['name'] ?? 'No Name');
-            },
-          ),
+      return ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundImage: NetworkImage(userData["image"] ?? 'https://via.placeholder.com/150'),
         ),
+        title: Text(
+          userData["name"] ?? 'No Name',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          userData["mobile"] ?? '86049492**',
+          style: TextStyle(color: Colors.grey),
+        ),
+        trailing: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              '12:35',
+              style: TextStyle(color: Colors.grey),
+            ),
+            SizedBox(height: 5),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                '0',
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+        onTap: () {
+          _isChatScreenActive = true;
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatScreen(
+                receiverEmail: userData['email'],
+                name: userData['name'],
+              ),
+            ),
+          ).then((_) {
+            _isChatScreenActive = false;
+          });
+
+          _listenForNewMessages(userData['email'], userData['name'] ?? 'No Name');
+        },
       );
     }
     return Container();
