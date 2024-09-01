@@ -18,7 +18,8 @@ class HomeScreen extends StatelessWidget {
   final FirebaseAuthServices _authService = FirebaseAuthServices();
   final NotificationServices _notificationServices = NotificationServices();
 
-  final Map<String, String> _lastMessageIds = {}; // Track the last message ID for each user
+  final Map<String, String> _lastMessageIds = {};
+
   bool _isChatScreenActive = false;
 
   @override
@@ -29,7 +30,23 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrawer(authController: authController),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Home Screen', style: TextStyle(fontSize: 20.sp)),
+        title: Text(
+          'Home Screen',
+          style: TextStyle(
+            fontSize: 22.sp,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent, Colors.lightBlue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -45,7 +62,7 @@ class HomeScreen extends StatelessWidget {
               );
               Get.off(() => LoginScreen());
             },
-            icon: Icon(Icons.logout, size: 24.r),
+            icon: Icon(Icons.logout, size: 24.r, color: Colors.white),
           ),
         ],
       ),
@@ -58,12 +75,13 @@ class HomeScreen extends StatelessWidget {
       stream: _chatService.getUserStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('Error');
+          return Center(child: Text('Error', style: TextStyle(color: Colors.red)));
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('Loading...');
+          return Center(child: CircularProgressIndicator());
         }
         return ListView(
+          padding: EdgeInsets.all(8.0),
           children: snapshot.data!
               .map<Widget>((userData) => _buildUserListItem(userData, context))
               .toList(),
@@ -79,7 +97,6 @@ class HomeScreen extends StatelessWidget {
         var lastMessageData = snapshot.docs.last.data();
         String newMessageId = snapshot.docs.last.id;
 
-        // Track the last message ID for this particular receiver
         if (_lastMessageIds[receiverEmail] != newMessageId && !_isChatScreenActive) {
           String messageContent = lastMessageData['message'] ?? 'New message';
 
@@ -89,7 +106,7 @@ class HomeScreen extends StatelessWidget {
             messageContent,
           );
 
-          _lastMessageIds[receiverEmail] = newMessageId; // Update last message ID for this receiver
+          _lastMessageIds[receiverEmail] = newMessageId;
         }
       }
     });
@@ -99,27 +116,40 @@ class HomeScreen extends StatelessWidget {
     String currentUserEmail = _authService.getCurrentUser()!.email!;
 
     if (userData['email'] != currentUserEmail) {
-      return UserTile(
-        text: userData["name"] ?? 'No Name',
-        subtitle: userData["mobile"] ?? '86049492**',
-        imageUrl: userData["image"] ?? 'https://via.placeholder.com/150',
-        onTap: () {
-          _isChatScreenActive = true;
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatScreen(
-                receiverEmail: userData['email'],
-                name: userData['name'],
-              ),
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 6.0),
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+          elevation: 4.0,
+          child: ListTile(
+            contentPadding: EdgeInsets.all(8.0),
+            leading: CircleAvatar(
+              radius: 30.r,
+              backgroundImage: NetworkImage(userData["image"] ?? 'https://via.placeholder.com/150'),
             ),
-          ).then((_) {
-            _isChatScreenActive = false;
-          });
-
-          _listenForNewMessages(userData['email'], userData['name'] ?? 'No Name');
-        },
+            title: Text(
+              userData["name"] ?? 'No Name',
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(userData["mobile"] ?? '86049492**'),
+            trailing: Icon(Icons.chat, color: Colors.blueAccent, size: 24.r),
+            onTap: () {
+              _isChatScreenActive = true;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiverEmail: userData['email'],
+                    name: userData['name'],
+                  ),
+                ),
+              ).then((_) {
+                _isChatScreenActive = false;
+              });
+              _listenForNewMessages(userData['email'], userData['name'] ?? 'No Name');
+            },
+          ),
+        ),
       );
     }
     return Container();
