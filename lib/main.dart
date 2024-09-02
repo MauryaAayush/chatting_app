@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'Controller/theme_controller.dart';
+import 'Helper/google_notification.dart';
 import 'Views/Login_screen.dart';
 import 'Views/home_screen.dart';
 import 'Views/setting_screen.dart';
@@ -14,12 +15,13 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseMessagingService.firebaseMessagingService.requestPermission();
+  await FirebaseMessagingService.firebaseMessagingService.generateDeviceToken();
 
-  String? token = await FirebaseMessaging.instance.getToken();
-  print(token);
+
+  // String? token = await FirebaseMessaging.instance.getToken();
+  // print(token);
 
   runApp(const MyApp());
 }
