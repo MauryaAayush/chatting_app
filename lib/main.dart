@@ -32,6 +32,7 @@ Future<void> main() async {
   await FirebaseMessagingService.firebaseMessagingService.generateDeviceToken();
 
   await FirebaseMessaging.instance.getInitialMessage();
+
   FirebaseMessagingServices.firebaseMessagingServices.onMessageListener();
 
   // call onBackgroundMessage from FirebaseMessaging and pass background message handler which above created
@@ -44,6 +45,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
