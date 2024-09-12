@@ -25,17 +25,22 @@ class SettingScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: themeController.isDark
-              ? Colors.grey[850]
-              : Theme.of(context).colorScheme.secondary,
+              ? Theme.of(context).colorScheme.primary
+              : Color(0xFF117554),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Dark Theme"),
+            const Text("Dark Theme",style: TextStyle(color: Colors.white),),
             CupertinoSwitch(
               value: themeController.isDark,
               onChanged: (value) => themeController.toggleTheme(),
+              activeColor: Color(0xFF117554),
+              offLabelColor: Colors.white,
+              focusColor: Colors.white,
+              onLabelColor: Colors.white,
+              trackColor: Colors.grey,
             ),
           ],
         ),

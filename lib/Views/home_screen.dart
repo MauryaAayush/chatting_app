@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Components/custom_drawer.dart';
 import '../Controller/controller.dart';
+import '../Controller/theme_controller.dart';
 import '../Helper/auth service.dart';
 import '../Helper/chat_services.dart';
 import '../Helper/notification_services.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   final ChatService _chatService = ChatService();
   final FirebaseAuthServices _authService = FirebaseAuthServices();
   final NotificationServices _notificationServices = NotificationServices();
+  final ThemeController themeController = Get.put(ThemeController());
 
   final Map<String, String> _lastMessageIds = {};
 
@@ -28,7 +30,6 @@ class HomeScreen extends StatelessWidget {
     AuthController authController = Get.put(AuthController());
 
     return Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.surface,  // Dark background color
       drawer: CustomDrawer(authController: authController),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -69,7 +70,9 @@ class HomeScreen extends StatelessWidget {
                 hintText: 'Search',
                 hintStyle: TextStyle(color: Colors.grey),
                 filled: true,
-                fillColor: Color(0xFF2C2C2C),
+                fillColor: themeController.isDark
+                    ? Theme.of(context).colorScheme.primary
+                    : Color(0xFF117554),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -157,18 +160,8 @@ class HomeScreen extends StatelessWidget {
               '12:35',
               style: TextStyle(color: Colors.grey),
             ),
-            SizedBox(height: 5),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                '0',
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ),
+
+
           ],
         ),
         onTap: () {

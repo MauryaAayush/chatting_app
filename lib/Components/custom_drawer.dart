@@ -17,7 +17,6 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -100,20 +99,20 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               //    setting list tile
-              Padding(
-                padding: const EdgeInsets.only(left: 25),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.call,
-                    size: 24.r,
-                    color: Theme.of(context).colorScheme.primary,
-                  ), // Responsive icon size
-                  title: Obx(() => Text(
-                        authController.mobile.value,
-                      )), // Responsive font size
-                  // subtitle:
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 25),
+              //   child: ListTile(
+              //     leading: Icon(
+              //       Icons.call,
+              //       size: 24.r,
+              //       color: Theme.of(context).colorScheme.primary,
+              //     ), // Responsive icon size
+              //     title: Obx(() => Text(
+              //           authController.mobile.value,
+              //         )), // Responsive font size
+              //     // subtitle:
+              //   ),
+              // ),
 
               Padding(
                 padding: const EdgeInsets.only(left: 25),
