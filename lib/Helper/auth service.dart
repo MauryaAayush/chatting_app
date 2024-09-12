@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,25 +9,25 @@ class FirebaseAuthServices {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  User? getCurrentUser(){
+  User? getCurrentUser() {
     return auth.currentUser;
   }
 
-
   Future<void> createAccountUsingEmail(
-      String email, String password, String name, String mobile,String image,) async {
-
-    print('------------------- Create function called--------------------------');
-
+      String email, String password, String name, String mobile, String image,
+      ) async {
+    log('------------------- Create function called--------------------------');
 
     try {
-      print('------------------ Starting ---------------------------------');
-      log("Sign Up Email : $email\n Password : $password");
+      log('------------------ Starting ---------------------------------');
+      log("Sign Up Email : $email\nPassword : $password");
+
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email,
+          password: password
+      );
 
-
-      print('------------------ Credential done ---------------------------------');
+      log('------------------ Credential done ---------------------------------');
 
       User? user = userCredential.user;
       if (user != null) {
@@ -38,45 +37,44 @@ class FirebaseAuthServices {
           'name': name,
           'mobile': mobile,
           'image': image,
-          'token' : token,
         });
 
-        print("User created and data added to Firestore: ${user.email}");
+        log("User created and data added to Firestore: ${user.email}");
       }
     } catch (e) {
-     log("ERROR : $e");
+      log("ERROR: $e");
+      rethrow;  // Optionally rethrow to handle errors in the UI
     }
   }
 
   Future<User?> signIn(String email, String password) async {
-    log("EMAIL : $email");
-    log("Password : $password");
+    log("EMAIL: $email");
+    log("Password: $password");
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+          email: email,
+          password: password
+      );
       return userCredential.user;
     } catch (e) {
-      print(e);
-      return null;
+      log("ERROR: $e");
+      return null;  // Optionally rethrow if you need further error handling
     }
   }
-
 
   Future<bool> checkEmailExists(String email) async {
     try {
       List<String> signInMethods = await auth.fetchSignInMethodsForEmail(email);
       return signInMethods.isNotEmpty;
     } catch (e) {
-      print(e);
+      log("ERROR: $e");
       return false;
     }
   }
 
-
   Future<void> sign_Out() async {
     await auth.signOut();
-    User? user = auth.currentUser;
-    if (user == null) {
+    if (auth.currentUser == null) {
       Get.back();
     }
   }

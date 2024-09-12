@@ -1,13 +1,12 @@
 class UserModel {
 
-  String? name, phone, email, photoUrl,token;
+  String? name, phone, email, photoUrl;
 
   UserModel({
     required this.name,
     required this.phone,
     required this.email,
     required this.photoUrl,
-    required this.token,
 
   });
 
@@ -16,7 +15,7 @@ class UserModel {
         phone: m1['phone'],
         email: m1['email'],
         photoUrl: m1['photoUrl'],
-        token: m1['token']);
+        );
   }
 
 
@@ -26,7 +25,7 @@ class UserModel {
       'phone' : user.phone,
       'email' : user.email,
       'photoUrl' : user.photoUrl,
-      'token' : user.token
+
     };
   }
 

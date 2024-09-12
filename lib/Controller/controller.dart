@@ -109,10 +109,11 @@ class AuthController extends GetxController {
       if (user != null) {
         userDetail.value = await getUser(email);
 
-        print("printing get user method outcome");
-        print(userDetail['name']+"---------------------");
-        print(userDetail['email']+"--------------------");
-        print(userDetail['mobile']+"-------------------");
+        print("------------------------------$email----------------------------");
+        // print("printing get user method outcome");
+        // print(userDetail['name']+"---------------------");
+        // print(userDetail['email']+"--------------------");
+        // print(userDetail['mobile']+"-------------------");
 
 
         Get.offNamed('/home');
