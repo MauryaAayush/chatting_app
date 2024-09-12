@@ -1,4 +1,5 @@
 import 'package:chatting_app/Components/chat_container.dart';
+import 'package:chatting_app/Helper/api_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,9 +26,21 @@ class _ChatScreenState extends State<ChatScreen> {
   final ChatService _chatService = ChatService();
   final FirebaseAuthServices _authService = FirebaseAuthServices();
 
+ @override
+  void initState() {
+
+   _chatService.getReceiverData(widget.receiverEmail);
+    // TODO: implement initState
+    super.initState();
+  }
+
   Future<void> sendMessage() async {
     if (_messageController.text.isNotEmpty) {
+
       await _chatService.sendMessage(widget.receiverEmail, _messageController.text);
+
+      ApiServices.apiServices.pushNotification(title:ChatService.receiverUserData!.name!,body: _messageController.text,token: ChatService.receiverUserData!.token);
+
       _messageController.clear();
     }
   }

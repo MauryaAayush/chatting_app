@@ -1,3 +1,4 @@
+import 'package:chatting_app/Helper/get_server_token.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -82,6 +83,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      // floatingActionButton: FloatingActionButton(onPressed: () {
+      //   GetServerToken.instance.getServerToken();
+      // },),
+
 
     );
   }

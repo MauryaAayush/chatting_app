@@ -1,3 +1,4 @@
+import 'package:chatting_app/Model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -56,6 +57,13 @@ class ChatService {
         .doc(chatRoomID)
         .collection('message')
         .add(newMessage.toMap());
+  }
+
+static UserModel? receiverUserData;
+
+  Future<void> getReceiverData(String receiverId) async {
+    final receiverData = await _firestore.collection("users").doc(receiverId).get();
+    receiverUserData = UserModel.fromMap(receiverData.data()!);
   }
 
 // get message

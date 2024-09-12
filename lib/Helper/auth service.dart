@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
 class FirebaseAuthServices {
   static FirebaseAuthServices authServices = FirebaseAuthServices();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
 
   User? getCurrentUser() {
     return auth.currentUser;
@@ -29,6 +31,8 @@ class FirebaseAuthServices {
 
       log('------------------ Credential done ---------------------------------');
 
+      String? token = await FirebaseMessaging.instance.getToken();
+
       User? user = userCredential.user;
       if (user != null) {
         // Add user data to Firestore
@@ -37,6 +41,7 @@ class FirebaseAuthServices {
           'name': name,
           'mobile': mobile,
           'image': image,
+          'token' : token,
         });
 
         log("User created and data added to Firestore: ${user.email}");

@@ -1,5 +1,6 @@
 import 'package:chatting_app/Controller/controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +34,8 @@ class GoogleLoginServices {
       final UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
       final User? user = userCredential.user;
 
+      String? token = await FirebaseMessaging.instance.getToken();
+
       if (user != null) {
         // Save user information to Firestore
         await firestore.collection('users').doc(user.email).set({
@@ -40,14 +43,15 @@ class GoogleLoginServices {
           'email': user.email,
           'mobile': user.phoneNumber,
           'image': user.photoURL,
+          'token' : token,
         });
 
         authController.userDetail.value = await authController.getUser(user.email!);
 
-        print("printing get user method outcome");
-        print(authController.userDetail['name']+"---------------------");
-        print(authController.userDetail['email']+"--------------------");
-        print(authController.userDetail['mobile']+"-------------------");
+        // print("printing get user method outcome");
+        // print(authController.userDetail['name']+"---------------------");
+        // print(authController.userDetail['email']+"--------------------");
+        // print(authController.userDetail['mobile']+"-------------------");
 
       }
     } catch (e) {
