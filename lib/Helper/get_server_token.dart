@@ -8,6 +8,20 @@ class GetServerToken {
   static final GetServerToken instance = GetServerToken._();
 
 
+  Future<String> getAccessToken() async {
+    // Load the service account credentials from the JSON file
+    var accountCredentials = ServiceAccountCredentials.fromJson(privateKey);
+
+    // Define the scopes required for FCM (Cloud Platform scope)
+    var scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
+
+    // Use the credentials to get an authenticated client
+    var authClient = await clientViaServiceAccount(accountCredentials, scopes);
+
+    // Return the OAuth 2.0 access token
+    return authClient.credentials.accessToken.data;
+  }
+
   // This server token update every hour as per internet info..
   Future<String?> getServerToken() async {
     final scopes = ['https://www.googleapis.com/auth/firebase.messaging'];

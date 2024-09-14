@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 
+import 'get_server_token.dart';
+
 class ApiServices {
   ApiServices._();
 
@@ -13,6 +15,9 @@ class ApiServices {
   static const String senderId = "";
 
   Future<void> pushNotification({required String title, body, token}) async {
+
+    String AccessToken = await GetServerToken.instance.getAccessToken();
+
     Map payLoad = {
       "message": {
         "token": token,
@@ -27,7 +32,7 @@ class ApiServices {
 
       headers: <String, String>{
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $generatedToken',
+        'Authorization': 'Bearer $AccessToken',
       },
       body: dataNotification,
     );

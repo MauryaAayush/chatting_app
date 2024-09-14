@@ -53,7 +53,7 @@ class CustomDrawer extends StatelessWidget {
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 28.r, // Responsive radius
+                          radius: 20.r, // Responsive radius
                           backgroundImage: NetworkImage(userPhoto),
                         ),
                         SizedBox(height: 16.h), // Responsive height

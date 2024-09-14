@@ -68,12 +68,12 @@ class HomeScreen extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: themeController.isDark
                     ? Theme.of(context).colorScheme.primary
-                    : Color(0xFF117554),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    : Color(0xFF6A9C89),
+                prefixIcon: Icon(Icons.search, color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
@@ -86,10 +86,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(onPressed: () {
-      //   GetServerToken.instance.getServerToken();
-      // },),
-
 
     );
   }
