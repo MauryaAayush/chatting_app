@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 fillColor: themeController.isDark
                     ? Theme.of(context).colorScheme.primary
                     : Color(0xFF6A9C89),
-                prefixIcon: Icon(Icons.search, color: Colors.white),
+                prefixIcon: const Icon(Icons.search, color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
