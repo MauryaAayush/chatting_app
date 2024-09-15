@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
                 filled: true,
                 fillColor: themeController.isDark
                     ? Theme.of(context).colorScheme.primary
